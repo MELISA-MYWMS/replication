@@ -1,0 +1,352 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Appendix&nbsp;C.&nbsp;Database Notes</title><link rel="stylesheet" href="css/docbook-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="up" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="prev" href="parameters.html" title="Appendix&nbsp;B.&nbsp;Parameters"><link rel="next" href="data-format.html" title="Appendix&nbsp;D.&nbsp;Data Format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" id="banner"><a style="border:none;" href="http://www.symmetricds.org/" title="SymmetricDS User Guide"><img style="border:none;" alt="SymmetricDS" src="images/banner-logo.gif"></a></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="databases"></a>Appendix&nbsp;C.&nbsp;Database Notes</h2></div></div></div>
+    
+    <p>
+        Each database management system has its own characteristics that results in
+        feature coverage in SymmetricDS.  The following table shows which features are available
+        by database.
+    </p>
+    <p>
+        </p><div class="table"><a name="d4e4715"></a><div class="table-contents">
+            
+            <table summary="Support by Database" border="1"><colgroup><col width="75"><col width="65"><col width="50"><col width="50"><col width="50"><col width="50"><col width="50"></colgroup><thead><tr><th>Database</th><th>Versions supported</th><th>Transaction Identifier</th><th>Fallback Update</th><th>Conditional Sync</th><th>Update Loop Prevention</th><th>BLOB Sync</th><th>CLOB Sync</th></tr></thead><tbody><tr><td>Oracle</td><td>8.1.7 and above</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>MySQL</td><td>5.0.2 and above</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>PostgreSQL</td><td>8.2.5 and above</td><td>Y (8.3 and above only)</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>SQL Server</td><td>2005</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>HSQLDB</td><td>1.8</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>HSQLDB</td><td>2.0</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>H2</td><td>1.x</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>Apache Derby</td><td>10.3.2.1</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>IBM DB2</td><td>9.5</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>Firebird</td><td>2.0</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr><tr><td>Informix</td><td>11</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>N</td><td>N</td></tr><tr><td>Interbase</td><td>9.0</td><td>N</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr></tbody></table>
+        </div><p class="title"><b>Table&nbsp;C.1.&nbsp;Support by Database</b></p></div><p><br class="table-break">
+    </p>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-oracle"></a>C.1.&nbsp;Oracle</h2></div></div></div>
+        
+        <p>
+            On Oracle Real Application Clusters (RAC), sequences should be ordered so data is processed 
+            in the correct order.
+            To offset the performance cost of ordering, the sequences should also be cached.
+            </p><pre class="programlisting">
+alter sequence SEQ_SYM_DATA_DATA_ID cache 1000 order;
+alter sequence SEQ_SYM_OUTGOIN_BATCH_BATCH_ID cache 1000 order;
+alter sequence SEQ_SYM_TRIGGER_RIGGER_HIST_ID cache 1000 order;
+alter sequence SEQ_SYM_TRIGGER_TRIGGER_ID cache 1000 order;</pre><p>
+        </p>
+        <p>
+            While BLOBs are supported on Oracle, the LONG data type is not.  LONG columns cannot be accessed from triggers.
+        </p>
+        <p>
+            Note that while Oracle supports multiple triggers of the same type to be defined, the order
+            in which the triggers occur appears to be arbitrary.
+        </p>
+        <p>
+            The SymmetricDS user generally needs privileges for connecting and creating 
+            tables (including indexes), triggers, sequences, and procedures (including packages and functions).
+            The following is an example of the needed grant statements:
+            </p><pre class="programlisting">
+GRANT CONNECT TO SYMMETRIC;
+GRANT RESOURCE TO SYMMETRIC;
+GRANT CREATE ANY TRIGGER TO SYMMETRIC;
+GRANT EXECUTE ON UTL_RAW TO SYMMETRIC;</pre><p>
+        </p>
+        <p>
+            Partitioning the <a href="data-model.html#table_data" title="A.20.&nbsp;DATA">DATA</a> table by channel can help
+            insert, routing and extraction performance on concurrent, high throughput systems.  
+            <a href="data-model.html#table_trigger" title="A.13.&nbsp;TRIGGER">TRIGGER</a>s should be organized to put data that is 
+            expected to be inserted concurrently on separate <a href="data-model.html#table_channel" title="A.10.&nbsp;CHANNEL">CHANNEL</a>s.  The following is an example of
+            partitioning.  Note that both the table and the index should be partitioned.  The default
+            value allows for more channels to be added without having to modify the partitions. 
+            </p><pre class="programlisting">
+CREATE TABLE SYM_DATA
+(
+    data_id INTEGER NOT NULL ,
+    table_name VARCHAR2(50) NOT NULL,
+    event_type CHAR(1) NOT NULL,
+    row_data CLOB,
+    pk_data CLOB,
+    old_data CLOB,
+    trigger_hist_id INTEGER NOT NULL,
+    channel_id VARCHAR2(20),
+    transaction_id VARCHAR2(1000),
+    source_node_id VARCHAR2(50),
+    external_data VARCHAR2(50),
+    create_time TIMESTAMP
+) PARTITION BY LIST (channel_id) (  	
+PARTITION P_CONFIG VALUES ('config'),
+PARTITION P_CHANNEL_ONE VALUES ('channel_one'),
+PARTITION P_CHANNEL_TWO VALUES ('channel_two'),
+...
+PARTITION P_CHANNEL_N VALUES ('channel_n'),
+PARTITION P_DEFAULT VALUES (DEFAULT));            
+            </pre><p>
+            </p><pre class="programlisting">
+CREATE UNIQUE INDEX IDX_D_CHANNEL_ID ON SYM_DATA (DATA_ID, CHANNEL_ID)  LOCAL
+( 
+ PARTITION I_CONFIG, 
+ PARTITION I_CHANNEL_ONE, 
+ PARTITION I_CHANNEL_TWO,
+ ... 
+ PARTITION I_CHANNEL_N, 
+ PARTITION I_DEFAULT
+);              
+            </pre><p>            
+        </p>        
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-mysql"></a>C.2.&nbsp;MySQL</h2></div></div></div>
+        
+        <p>
+            MySQL supports several storage engines for different table types.  SymmetricDS requires
+            a storage engine that handles transaction-safe tables.  The recommended storage engine
+            is InnoDB, which is included by default in MySQL 5.0 distributions.
+            Either select the InnoDB engine during installation or modify your server configuration.
+            To make InnoDB the default storage engine, modify your MySQL server configuration file 
+            (<code class="filename">my.ini</code> on Windows, <code class="filename">my.cnf</code> on Unix):
+            </p><pre class="programlisting">default-storage_engine = innodb</pre><p>
+            Alternatively, you can convert tables to the InnoDB storage engine with the following
+            command:
+            </p><pre class="programlisting">alter table t engine = innodb;</pre><p>            
+        </p>
+        <p>
+            On MySQL 5.0, the SymmetricDS user needs the SUPER privilege in order to create triggers.
+
+            </p><pre class="programlisting">grant super on *.* to symmetric;</pre><p>
+            
+            On MySQL 5.1, the SymmetricDS user needs the TRIGGER and CREATE ROUTINE privileges
+            in order to create triggers and functions.
+
+            </p><pre class="programlisting">grant trigger on *.* to symmetric;</pre><p>
+            </p><pre class="programlisting">grant create routine on *.* to symmetric;</pre><p>
+
+        </p>
+        <p>
+            MySQL allows '0000-00-00 00:00:00' to be entered as a value for datetime and timestamp columns.  
+            JDBC can not deal with a date value with a year of 0.  In order to work around this SymmetricDS
+            can be configured to treat date and time columns as varchar columns for data capture and data
+            load.  To enable this feature set the <code class="code">db.treat.date.time.as.varchar.enabled</code> property 
+            to <code class="code">true</code>.
+        </p>
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-postgresql"></a>C.3.&nbsp;PostgreSQL</h2></div></div></div>
+        
+        <p>
+            Starting with PostgreSQL 8.3, SymmetricDS supports the transaction identifier.
+            Binary Large Object (BLOB) replication is supported for both byte array (BYTEA)
+            and object ID (OID) data types.
+        </p>
+        <p>
+            In order to function properly, SymmetricDS needs to use session variables.
+            On PostgreSQL, session variables are enabled using a custom variable class.
+            Add the following line to the <code class="filename">postgresql.conf</code> file
+            of PostgreSQL server:
+            
+            </p><pre class="programlisting">
+custom_variable_classes = 'symmetric'
+</pre><p>
+
+            This setting is required, and SymmetricDS will log an error and exit if it is not present.
+        </p>
+        <p>
+            Before database triggers can be created by in PostgreSQL,
+            the plpgsql language handler must be installed on the database.
+            The following statements should be run by the administrator on the database:
+            
+            </p><pre class="programlisting">
+CREATE FUNCTION plpgsql_call_handler() RETURNS language_handler AS
+    '$libdir/plpgsql' LANGUAGE C;
+
+CREATE FUNCTION plpgsql_validator(oid) RETURNS void AS
+    '$libdir/plpgsql' LANGUAGE C;
+
+CREATE TRUSTED PROCEDURAL LANGUAGE plpgsql
+    HANDLER plpgsql_call_handler
+    VALIDATOR plpgsql_validator;</pre><p>
+        </p>
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-sql-server"></a>C.4.&nbsp;MS SQL Server</h2></div></div></div>
+        
+        <p>
+            SQL Server was tested using the
+            <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://jtds.sourceforge.net/" target="_top">
+                jTDS
+            </a>
+            JDBC driver.
+        </p>
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-hsqldb"></a>C.5.&nbsp;HSQLDB</h2></div></div></div>
+        
+        <p>
+            HSQLDB was implemented with the intention that the database be run embedded in the same JVM process 
+            as SymmetricDS.  Instead of dynamically generating static SQL-based triggers like the other databases, HSQLDB
+            triggers are Java classes that re-use existing SymmetricDS services to read the configuration and insert data events
+            accordingly.
+        </p>
+        <p>
+            The transaction identifier support is based on SQL events that happen in a 'window' of time.  The trigger(s) track when the 
+            last trigger fired.  If a trigger fired within X milliseconds of the previous firing, then the current event gets the same 
+            transaction identifier as the last.  If the time window has passed, then a new transaction identifier is generated.
+        </p>        
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-h2"></a>C.6.&nbsp;H2</h2></div></div></div>
+        
+        <p>
+            The H2 database allows only Java-based triggers.  Therefore the H2 dialect requires that the SymmetricDS jar file be in the database's classpath.  
+        </p>
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-derby"></a>C.7.&nbsp;Apache Derby</h2></div></div></div>
+        
+        <p>
+            The Derby database can be run as an embedded database that is accessed by an application
+            or a standalone server that can be accessed from the network.
+            This dialect implementation creates database triggers that make method calls into
+            Java classes.  This means that the supporting JAR files need to be in the classpath when
+            running Derby as a standalone database, which includes symmetric-ds.jar and
+            commons-lang.jar.
+        </p>
+    </div>    
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-db2"></a>C.8.&nbsp;IBM DB2</h2></div></div></div>
+        
+        <p>
+            The DB2 Dialect uses global variables to enable and disable node and trigger synchronization.
+            These variables are created automatically during the first startup.  
+            The DB2 JDBC driver should be placed in the "lib" folder.
+        </p>
+        <p>
+            Currently, the DB2 Dialect for SymmetricDS does not provide support for transactional synchronization.
+            Large objects (LOB) are supported, but are limited to 16,336 bytes in size.
+            The current features in the DB2 Dialect have been tested using DB2 9.5 on Linux and Windows operating systems.  
+        </p> 
+        <p>
+            There is currently a bug with the retrieval of auto increment columns with the DB2 9.5 JDBC drivers that causes
+            some of the SymmetricDS configuration tables to be rebuilt when auto.config.database=true.  The DB2 9.7 JDBC drivers
+            seem to have fixed the issue.  They may be used with the 9.5 database.
+        </p>       
+        <p>
+            A system temporary tablespace with too small of a page size may cause the following trigger build errors:
+            </p><pre class="programlisting">
+SQL1424N Too many references to transition variables and transition table
+columns or the row length for these references is too long. Reason
+code="2". LINE NUMBER=1. SQLSTATE=54040            
+            </pre><p>
+            Simply create a system temporary tablespace that has a bigger page size.  A page size of 8k will probably suffice.
+        </p>
+    </div>      
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-firebird"></a>C.9.&nbsp;Firebird</h2></div></div></div>
+        
+        <p>
+            The Firebird Dialect requires the installation of a User Defined Function (UDF) library
+            in order to provide functionality needed by the database triggers.
+            SymmetricDS includes the required UDF library, called SYM_UDF, in both source form 
+            (as a C program) and as pre-compiled libraries for both Windows and Linux.  
+            The SYM_UDF library is copied into the UDF folder within the Firebird installation directory.
+        </p>
+        <p>
+            For Linux users: 
+        </p>
+        <p>
+            <span><strong class="command">cp databases/firebird/sym_udf.so /opt/firebird/UDF</strong></span>
+        </p>
+        <p>
+            For Windows users: 
+        </p>
+        <p>
+            <span><strong class="command">copy databases\firebird\sym_udf.dll C:\Program Files\Firebird\Firebird_2_0\UDF</strong></span>        
+        </p>
+        <p>
+            The following limitations currently exist for this dialect:
+        </p>
+        <p>
+          </p><div class="itemizedlist"><ul type="disc" compact><li>
+                  <p>
+                      The outgoing batch does not honor the channel size, and all 
+                      outstanding data events are included in a batch.
+                  </p>
+              </li><li>
+                  <p>
+                      Syncing of Binary Large Object (BLOB) is limited to 16K bytes per column.
+                  </p>
+              </li><li>
+                  <p>
+                      Syncing of character data is limited to 32K bytes per column.
+                  </p>
+              </li></ul></div><p>
+        </p>
+    </div>      
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-informix"></a>C.10.&nbsp;Informix</h2></div></div></div>
+        
+        <p>
+            The Informix Dialect was tested against Informix Dynamic Server 11.50, but older versions
+            may also work.  You need to download the Informix JDBC Driver (from the 
+            <a xmlns:xlink="http://www.w3.org/1999/xlink" href="http://www-01.ibm.com/software/data/informix/downloads.html" target="_top">IBM Download Site</a>)
+            and put the <code class="filename">ifxjdbc.jar</code> and <code class="filename">ifxlang.jar</code> files
+            in the SymmetricDS <code class="filename">lib</code> folder.
+        </p>
+        <p>    
+            Make sure your database has logging enabled, which enables transaction
+            support.  Enable logging when creating the database, like this:
+            </p><pre class="programlisting">
+CREATE DATABASE MYDB WITH LOG;
+            </pre><p>
+            
+            Or enable logging on an existing database, like this:
+            </p><pre class="programlisting">
+ondblog mydb unbuf log
+ontape -s -L 0
+            </pre><p>
+        </p>
+        <p>
+            The following features are not yet implemented:
+        </p>
+        <p>
+          </p><div class="itemizedlist"><ul type="disc" compact><li>
+                  <p>
+                      Syncing of Binary and Character Large Objects (LOB) is disabled.
+                  </p>
+              </li><li>
+                  <p>
+                      There is no transaction ID recorded on data captured, so it is possible for data
+                      to be committed within different transactions on the target database.
+                      If transaction synchronization is required, either specify a custom transaction ID 
+                      or configure the synchronization so data is always sent in a single batch.
+                      A custom transaction ID can be specified with the tx_id_expression on  
+                      <a href="data-model.html#table_trigger" title="A.13.&nbsp;TRIGGER">TRIGGER</a>.
+                      The batch size is controlled with the max_batch_size on                        
+                      <a href="data-model.html#table_channel" title="A.10.&nbsp;CHANNEL">CHANNEL</a>.
+                      The pull and push jobs have runtime properties to control their interval.
+                  </p>
+              </li></ul></div><p>
+        </p>
+    </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap02-interbase"></a>C.11.&nbsp;Interbase</h2></div></div></div>
+        
+        <p>
+            The Interbase Dialect requires the installation of a User Defined Function (UDF) library
+            in order to provide functionality needed by the database triggers.
+            SymmetricDS includes the required UDF library, called SYM_UDF, in both source form 
+            (as a C program) and as pre-compiled libraries for both Windows and Linux.  
+            The SYM_UDF library is copied into the UDF folder within the Interbase installation directory.
+        </p>
+        <p>
+            For Linux users: 
+        </p>
+        <p>
+            <span><strong class="command">cp databases/interbase/sym_udf.so /opt/interbase/UDF</strong></span>
+        </p>
+        <p>
+            For Windows users: 
+        </p>
+        <p>
+            <span><strong class="command">copy databases\interbase\sym_udf.dll C:\CodeGear\InterBase\UDF</strong></span>        
+        </p>
+        <p>
+            The Interbase dialect currently has the following limitations:  
+        </p>
+        <div class="itemizedlist"><ul type="disc" compact><li>
+                <p>
+                    Data capture is limited to 4 KB per row, including large objects (LOB).
+                </p>
+            </li><li>
+                <p>
+                    There is no transaction ID recorded on data captured.
+                    Either specify a tx_id_expression on the
+                    <a href="data-model.html#table_trigger" title="A.13.&nbsp;TRIGGER">TRIGGER</a> table,
+                    or set a max_batch_size on the                        
+                    <a href="data-model.html#table_channel" title="A.10.&nbsp;CHANNEL">CHANNEL</a> table that
+                    will accommodate your transactional data.
+                </p>
+            </li></ul></div>
+    </div>
+</div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="30%" align="left"><a accesskey="p" href="parameters.html">Prev</a>&nbsp;</td><td width="40%" align="center"><a accesskey="h" href="user-guide.html">Home</a></td><td width="30%" align="right">&nbsp;<a accesskey="n" href="data-format.html">Next</a></td></tr><tr><td width="30%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Parameters&nbsp;</td><td width="40%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.symmetricds.org/" title="SymmetricDS">SymmetricDS
+                                        </a></span></td><td width="30%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Data Format</td></tr></table></div></body></html>

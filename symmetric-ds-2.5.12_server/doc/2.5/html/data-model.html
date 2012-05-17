@@ -1,0 +1,604 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Appendix&nbsp;A.&nbsp;Data Model</title><link rel="stylesheet" href="css/docbook-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="up" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="prev" href="administration.html" title="Chapter&nbsp;7.&nbsp;Administration"><link rel="next" href="parameters.html" title="Appendix&nbsp;B.&nbsp;Parameters"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" id="banner"><a style="border:none;" href="http://www.symmetricds.org/" title="SymmetricDS User Guide"><img style="border:none;" alt="SymmetricDS" src="images/banner-logo.gif"></a></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="data-model"></a>Appendix&nbsp;A.&nbsp;Data Model</h2></div></div></div>
+    
+    <p> 
+        What follows is the complete SymmetricDS data model.
+        Note that all tables are prepended with a configurable prefix so that multiple instances of SymmetricDS may coexist in the
+        same database. The default prefix is
+        <span class="emphasis"><em>sym_</em></span>.
+    </p>
+
+    <p> 
+        SymmetricDS configuration is entered by the user into the data model to control the behavior of what data is synchronized
+            to which nodes.
+    </p>
+    <p>
+            </p><div class="figure"><a name="d4e1636"></a><div class="figure-contents">
+                
+                <div class="mediaobject"><img src="./images/data-model-config.gif" alt="Configuration Data Model"></div>
+            </div><p class="title"><b>Figure&nbsp;A.1.&nbsp;Configuration Data Model</b></p></div><p><br class="figure-break">
+    </p>
+        
+    <p> At runtime, the configuration is used to capture data changes and route them to nodes. The data changes are placed
+            together in a single unit called a batch that can be loaded by another node. Outgoing batches are delivered to nodes
+            and acknowledged. Incoming batches are received and loaded. History is recorded for batch status changes and
+            statistics.</p>
+    <p>
+            </p><div class="figure"><a name="d4e1643"></a><div class="figure-contents">
+                
+                <div class="mediaobject"><img src="./images/data-model-runtime.gif" alt="Runtime Data Model"></div>
+            </div><p class="title"><b>Figure&nbsp;A.2.&nbsp;Runtime Data Model</b></p></div><p><br class="figure-break">
+    </p>
+		 
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node"></a>A.1.&nbsp;NODE</h2></div></div></div>
+    
+    <p>Representation of an instance of SymmetricDS that synchronizes data with one or more additional nodes. Each node has a unique identifier (nodeId) that is used when communicating, as well as a domain-specific identifier (externalId) that provides context within the local system.</p>
+	<div class="table"><a name="table-def-node"></a><div class="table-contents">
+    	
+    	<table summary="NODE" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The node group that this node belongs to, such as 'store'.</td></tr><tr><td>
+                 	EXTERNAL_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> A domain-specific identifier for context within the local system. For example, the retail store number. </td></tr><tr><td>
+                 	SYNC_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates whether this node should be sent synchronization. Disabled nodes are ignored by the triggers, so no entries are made in data_event for the node.</td></tr><tr><td>
+                 	SYNC_URL                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The URL to contact the node for synchronization.</td></tr><tr><td>
+                 	SCHEMA_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The version of the database schema this node manages. Useful for specifying synchronization by version. </td></tr><tr><td>
+                 	SYMMETRIC_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The version of SymmetricDS running at this node.</td></tr><tr><td>
+                 	DATABASE_TYPE                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The database product name at this node as reported by JDBC.</td></tr><tr><td>
+                 	DATABASE_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The database product version at this node as reported by JDBC.</td></tr><tr><td>
+                 	HEARTBEAT_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The last timestamp when the node sent a heartbeat, which is attempted every ten minutes by default.</td></tr><tr><td>
+                 	TIMEZONE_OFFSET                </td><td>VARCHAR  (6)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The timezone offset in RFC822 format at the time of the last heartbeat. </td></tr><tr><td>
+                 	BATCH_TO_SEND_COUNT                </td><td>INTEGER </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The number of outgoing batches that have not yet been sent.  This field is updated as part of the heartbeat job.</td></tr><tr><td>
+                 	BATCH_IN_ERROR_COUNT                </td><td>INTEGER </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The number of outgoing batches that are in error at this node.  This field is updated as part of the heartbeat job.</td></tr><tr><td>
+                 	CREATED_AT_NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The node_id of the node where this node was created. This is typically filled automatically with the node_id found in node_identity where registration was opened for the node. </td></tr><tr><td>
+                 	DEPLOYMENT_TYPE                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> An indicator as to the type of SymmetricDS software that is running.  Possible values are, but not limited to: engine, standalone, war, professional, mobile</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.1.&nbsp;NODE</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_security"></a>A.2.&nbsp;NODE_SECURITY</h2></div></div></div>
+    
+    <p>Security features like node passwords and open registration flag are stored in the node_security table. </p>
+	<div class="table"><a name="table-def-node_security"></a><div class="table-contents">
+    	
+    	<table summary="NODE_SECURITY" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a node.</td></tr><tr><td>
+                 	NODE_PASSWORD                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The password used by the node to prove its identity during synchronization.</td></tr><tr><td>
+                 	REGISTRATION_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates whether registration is open for this node.  Re-registration may be forced for a node if this is set back to '1' in a parent database for the node_id that should be re-registred.</td></tr><tr><td>
+                 	REGISTRATION_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The timestamp when this node was last registered.</td></tr><tr><td>
+                 	INITIAL_LOAD_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates whether an initial load will be sent to this node.</td></tr><tr><td>
+                 	INITIAL_LOAD_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The timestamp when this node started the initial load.</td></tr><tr><td>
+                 	CREATED_AT_NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The node_id of the node where this node was created. This is typically filled automatically with the node_id found in node_identity where registration was opened for the node. </td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.2.&nbsp;NODE_SECURITY</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_identity"></a>A.3.&nbsp;NODE_IDENTITY</h2></div></div></div>
+    
+    <p>After registration, this table will have one row representing the identity of the node. For a root node, the row is entered by the user.</p>
+	<div class="table"><a name="table-def-node_identity"></a><div class="table-contents">
+    	
+    	<table summary="NODE_IDENTITY" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a node.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.3.&nbsp;NODE_IDENTITY</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_group"></a>A.4.&nbsp;NODE_GROUP</h2></div></div></div>
+    
+    <p>A category of Nodes that synchronizes data with one or more NodeGroups. A common use of NodeGroup is to describe a level in a hierarchy of data synchronization.</p>
+	<div class="table"><a name="table-def-node_group"></a><div class="table-contents">
+    	
+    	<table summary="NODE_GROUP" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a node group, usually named something meaningful, like 'store' or 'warehouse'.</td></tr><tr><td>
+                 	DESCRIPTION                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> A description of this node group.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.4.&nbsp;NODE_GROUP</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_group_link"></a>A.5.&nbsp;NODE_GROUP_LINK</h2></div></div></div>
+    
+    <p>A source node_group sends its data updates to a target NodeGroup using a pull, push, or custom technique.</p>
+	<div class="table"><a name="table-def-node_group_link"></a><div class="table-contents">
+    	
+    	<table summary="NODE_GROUP_LINK" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	SOURCE_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node group where data changes should be captured.</td></tr><tr><td>
+                 	TARGET_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node group where data changes will be sent.</td></tr><tr><td>
+                 	DATA_EVENT_ACTION                </td><td>CHAR  (1)</td><td> W</td><td>				</td><td>X</td><td> The notification scheme used to send data changes to the target node group. (P = Push, W = Wait for Pull) </td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.5.&nbsp;NODE_GROUP_LINK</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_host"></a>A.6.&nbsp;NODE_HOST</h2></div></div></div>
+    
+    <p>Representation of an physical workstation or server that is hosting the SymmetricDS software. In a clustered environment there may be more than one entry per node in this table.</p>
+	<div class="table"><a name="table-def-node_host"></a><div class="table-contents">
+    	
+    	<table summary="NODE_HOST" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	HOST_NAME                </td><td>VARCHAR  (60)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The host name of a workstation or server. If more than one instance of SymmetricDS runs on the same server, then this value can be a 'server id' specified by -Druntime.symmetric.cluster.server.id</td></tr><tr><td>
+                 	IP_ADDRESS                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The ip address for the host.</td></tr><tr><td>
+                 	OS_USER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The user SymmetricDS is running under</td></tr><tr><td>
+                 	OS_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The name of the OS</td></tr><tr><td>
+                 	OS_ARCH                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The hardware architecture of the OS</td></tr><tr><td>
+                 	OS_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The version of the OS</td></tr><tr><td>
+                 	AVAILABLE_PROCESSORS                </td><td>INTEGER </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The number of processors available to use.</td></tr><tr><td>
+                 	FREE_MEMORY_BYTES                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The amount of free memory available to the JVM.</td></tr><tr><td>
+                 	TOTAL_MEMORY_BYTES                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The amount of total memory available to the JVM.</td></tr><tr><td>
+                 	MAX_MEMORY_BYTES                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The max amount of memory available to the JVM.</td></tr><tr><td>
+                 	JAVA_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The version of java that SymmetricDS is running as.</td></tr><tr><td>
+                 	JAVA_VENDOR                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The vendor of java that SymmetricDS is running as.</td></tr><tr><td>
+                 	SYMMETRIC_VERSION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The version of SymmetricDS running at this node.</td></tr><tr><td>
+                 	TIMEZONE_OFFSET                </td><td>VARCHAR  (6)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The timezone offset in RFC822 format at the time of the last heartbeat. </td></tr><tr><td>
+                 	HEARTBEAT_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The last timestamp when the node sent a heartbeat, which is attempted every ten minutes by default.</td></tr><tr><td>
+                 	LAST_RESTART_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this instance was last restarted.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.6.&nbsp;NODE_HOST</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_host_channel_stats"></a>A.7.&nbsp;NODE_HOST_CHANNEL_STATS</h2></div></div></div>
+    
+    <p></p>
+	<div class="table"><a name="table-def-node_host_channel_stats"></a><div class="table-contents">
+    	
+    	<table summary="NODE_HOST_CHANNEL_STATS" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	HOST_NAME                </td><td>VARCHAR  (60)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The host name of a workstation or server. If more than one instance of SymmetricDS runs on the same server, then this value can be a 'server id' specified by -Druntime.symmetric.cluster.server.id</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The channel_id of the channel that data changes will flow through.</td></tr><tr><td>
+                 	START_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	END_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	DATA_ROUTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicate the number of data rows that have been routed during this period.</td></tr><tr><td>
+                 	DATA_UNROUTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_EVENT_INSERTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicate the number of data rows that have been routed during this period.</td></tr><tr><td>
+                 	DATA_EXTRACTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_BYTES_EXTRACTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_EXTRACTED_ERRORS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_BYTES_SENT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_SENT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_SENT_ERRORS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_LOADED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_BYTES_LOADED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	DATA_LOADED_ERRORS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.7.&nbsp;NODE_HOST_CHANNEL_STATS</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_host_stats"></a>A.8.&nbsp;NODE_HOST_STATS</h2></div></div></div>
+    
+    <p></p>
+	<div class="table"><a name="table-def-node_host_stats"></a><div class="table-contents">
+    	
+    	<table summary="NODE_HOST_STATS" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	HOST_NAME                </td><td>VARCHAR  (60)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The host name of a workstation or server. If more than one instance of SymmetricDS runs on the same server, then this value can be a 'server id' specified by -Druntime.symmetric.cluster.server.id</td></tr><tr><td>
+                 	START_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	END_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	RESTARTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> Indicate that a restart occurred during this period.</td></tr><tr><td>
+                 	NODES_PULLED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	TOTAL_NODES_PULL_TIME                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	NODES_PUSHED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	TOTAL_NODES_PUSH_TIME                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	NODES_REJECTED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	NODES_REGISTERED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	NODES_LOADED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	NODES_DISABLED                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	PURGED_DATA_ROWS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	PURGED_DATA_EVENT_ROWS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	PURGED_BATCH_OUTGOING_ROWS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	PURGED_BATCH_INCOMING_ROWS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	TRIGGERS_CREATED_COUNT                </td><td>BIGINT </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	TRIGGERS_REBUILT_COUNT                </td><td>BIGINT </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> </td></tr><tr><td>
+                 	TRIGGERS_REMOVED_COUNT                </td><td>BIGINT </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> </td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.8.&nbsp;NODE_HOST_STATS</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_host_job_stats"></a>A.9.&nbsp;NODE_HOST_JOB_STATS</h2></div></div></div>
+    
+    <p></p>
+	<div class="table"><a name="table-def-node_host_job_stats"></a><div class="table-contents">
+    	
+    	<table summary="NODE_HOST_JOB_STATS" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	HOST_NAME                </td><td>VARCHAR  (60)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The host name of a workstation or server. If more than one instance of SymmetricDS runs on the same server, then this value can be a 'server id' specified by -Druntime.symmetric.cluster.server.id</td></tr><tr><td>
+                 	JOB_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	START_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	END_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> </td></tr><tr><td>
+                 	PROCESSED_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>&nbsp;</td><td> </td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.9.&nbsp;NODE_HOST_JOB_STATS</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_channel"></a>A.10.&nbsp;CHANNEL</h2></div></div></div>
+    
+    <p>This table represents a category of data that can be synchronized independently of other channels. Channels allow control over the type of data flowing and prevents one type of synchronization from contending with another.</p>
+	<div class="table"><a name="table-def-channel"></a><div class="table-contents">
+    	
+    	<table summary="CHANNEL" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique identifer, usually named something meaningful, like 'sales' or 'inventory'.</td></tr><tr><td>
+                 	PROCESSING_ORDER                </td><td>INTEGER </td><td> 1</td><td>				</td><td>X</td><td> Order of sequence to process channel data.</td></tr><tr><td>
+                 	MAX_BATCH_SIZE                </td><td>INTEGER </td><td> 1000</td><td>				</td><td>X</td><td> The maximum number of Data Events to process within a batch for this channel.</td></tr><tr><td>
+                 	MAX_BATCH_TO_SEND                </td><td>INTEGER </td><td> 60</td><td>				</td><td>X</td><td> The maximum number of batches to send during a 'synchronization' between two nodes. A 'synchronization' is equivalent to a push or a pull. If there are 12 batches ready to be sent for a channel and max_batch_to_send is equal to 10, then only the first 10 batches will be sent.</td></tr><tr><td>
+                 	MAX_DATA_TO_ROUTE                </td><td>INTEGER </td><td> 100000</td><td>				</td><td>X</td><td> The maximum number of data rows to route for a channel at a time.</td></tr><tr><td>
+                 	EXTRACT_PERIOD_MILLIS                </td><td>INTEGER </td><td> 0</td><td>				</td><td>X</td><td> The minimum number of milliseconds allowed between attempts to extract data for targeted at a node_id.</td></tr><tr><td>
+                 	ENABLED                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Indicates whether channel is enabled or not.</td></tr><tr><td>
+                 	USE_OLD_DATA_TO_ROUTE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Indicates whether to read the old data during routing.</td></tr><tr><td>
+                 	USE_ROW_DATA_TO_ROUTE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Indicates whether to read the row data during routing.</td></tr><tr><td>
+                 	USE_PK_DATA_TO_ROUTE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Indicates whether to read the pk data during routing.</td></tr><tr><td>
+                 	CONTAINS_BIG_LOB                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> Provides SymmetricDS a hint as to whether this channel will contain big lobs data.  Some databases have shortcuts that SymmetricDS can take advantage of if it knows that the lob columns in sym_data aren't going to contain large lobs.  The definition of how big a 'large' lob is will differ from database to database.</td></tr><tr><td>
+                 	BATCH_ALGORITHM                </td><td>VARCHAR  (50)</td><td> default</td><td>				</td><td>X</td><td> The algorithm to use when batching data on this channel.  Possible values are: 'default', 'transactional', and 'nontransactional'</td></tr><tr><td>
+                 	DESCRIPTION                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Description on the type of data carried in this channel.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.10.&nbsp;CHANNEL</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_channel_ctl"></a>A.11.&nbsp;NODE_CHANNEL_CTL</h2></div></div></div>
+    
+    <p>Used to ignore or suspend a channel. A channel that is ignored will have its data_events batched and they will immediately be marked as 'OK' without sending them. A channel that is suspended is skipped when batching data_events.</p>
+	<div class="table"><a name="table-def-node_channel_ctl"></a><div class="table-contents">
+    	
+    	<table summary="NODE_CHANNEL_CTL" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a node.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The name of the channel_id that is being controlled.</td></tr><tr><td>
+                 	SUSPEND_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates if this channel is suspended, which prevents its Data Events from being batched.</td></tr><tr><td>
+                 	IGNORE_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates if this channel is ignored, which marks its Data Events as if they were actually processed.</td></tr><tr><td>
+                 	LAST_EXTRACT_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Record the last time data was extract for a node and a channel.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.11.&nbsp;NODE_CHANNEL_CTL</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_node_group_channel_window"></a>A.12.&nbsp;NODE_GROUP_CHANNEL_WINDOW</h2></div></div></div>
+    
+    <p>An optional window of time for which a node group and channel will be active. </p>
+	<div class="table"><a name="table-def-node_group_channel_window"></a><div class="table-contents">
+    	
+    	<table summary="NODE_GROUP_CHANNEL_WINDOW" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node_group_id that this window applies to.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The channel_id that this window applies to.</td></tr><tr><td>
+                 	START_TIME                </td><td>TIME </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The start time for the active window.</td></tr><tr><td>
+                 	END_TIME                </td><td>TIME </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The end time for the active window.  Note that if the end_time is less than the start_time then the window crosses a day boundary.</td></tr><tr><td>
+                 	ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> Enable this window.  If this is set to '0' then this window is ignored.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.12.&nbsp;NODE_GROUP_CHANNEL_WINDOW</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_trigger"></a>A.13.&nbsp;TRIGGER</h2></div></div></div>
+    
+    <p>Configures database triggers that capture changes in the database. Configuration of which triggers are generated for which tables is stored here.  Triggers are created in a node's database if the source_node_group_id of a router is mapped to a row in this table.</p>
+	<div class="table"><a name="table-def-trigger"></a><div class="table-contents">
+    	
+    	<table summary="TRIGGER" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	TRIGGER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a trigger.</td></tr><tr><td>
+                 	SOURCE_CATALOG_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the catalog the configured table is in.</td></tr><tr><td>
+                 	SOURCE_SCHEMA_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the schema a configured table is in.</td></tr><tr><td>
+                 	SOURCE_TABLE_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name of the source table that will have a trigger installed to watch for data changes.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The channel_id of the channel that data changes will flow through.</td></tr><tr><td>
+                 	SYNC_ON_UPDATE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Whether or not to install an update trigger.</td></tr><tr><td>
+                 	SYNC_ON_INSERT                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Whether or not to install an insert trigger.</td></tr><tr><td>
+                 	SYNC_ON_DELETE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Whether or not to install an delete trigger.</td></tr><tr><td>
+                 	SYNC_ON_INCOMING_BATCH                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> Whether or not an incoming batch that loads data into this table should cause the triggers to capture data_events. Be careful turning this on, because an update loop is possible.</td></tr><tr><td>
+                 	NAME_FOR_UPDATE_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Override the default generated name for the update trigger.</td></tr><tr><td>
+                 	NAME_FOR_INSERT_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Override the default generated name for the insert trigger.</td></tr><tr><td>
+                 	NAME_FOR_DELETE_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Override the default generated name for the delete trigger.</td></tr><tr><td>
+                 	SYNC_ON_UPDATE_CONDITION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Specify a condition for the update trigger firing using an expression specific to the database.</td></tr><tr><td>
+                 	SYNC_ON_INSERT_CONDITION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Specify a condition for the insert trigger firing using an expression specific to the database.</td></tr><tr><td>
+                 	SYNC_ON_DELETE_CONDITION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Specify a condition for the delete trigger firing using an expression specific to the database.</td></tr><tr><td>
+                 	EXTERNAL_SELECT                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Specify a SQL select statement that returns a single result.  It will be used in the generated database trigger to populate the EXTERNAL_DATA field on the data table.</td></tr><tr><td>
+                 	TX_ID_EXPRESSION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Override the default expression for the transaction identifier that groups the data changes that were committed together.</td></tr><tr><td>
+                 	EXCLUDED_COLUMN_NAMES                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Specify a comma-delimited list of columns that should not be synchronized from this table.  Note that if a primary key is found in this list, it will be ignored.</td></tr><tr><td>
+                 	USE_STREAM_LOBS                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> Specifies whether to capture lob data as the trigger is firing or to stream lob columns from the source tables using callbacks during extraction. A value of 1 indicates to stream from the source via callback; a value of 0, lob data is captured by the trigger.</td></tr><tr><td>
+                 	USE_CAPTURE_LOBS                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> Provides a hint as to whether this trigger will capture big lobs data.  If set to 1 every effort will be made during data capture in trigger and during data selection for initial load to use lob facilities to extract and store data in the database.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	LAST_UPDATE_BY                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The user who last updated this entry.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when a user last updated this entry.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.13.&nbsp;TRIGGER</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_router"></a>A.14.&nbsp;ROUTER</h2></div></div></div>
+    
+    <p>Configure a type of router from one node group to another.  Note that routers are mapped to triggers through trigger_routers.</p>
+	<div class="table"><a name="table-def-router"></a><div class="table-contents">
+    	
+    	<table summary="ROUTER" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	ROUTER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique description of a specific router</td></tr><tr><td>
+                 	TARGET_CATALOG_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the catalog a target table is in. Only use this if the target table is not in the default catalog.</td></tr><tr><td>
+                 	TARGET_SCHEMA_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name of the schema a target table is in. On use this if the target table is not in the default schema.</td></tr><tr><td>
+                 	TARGET_TABLE_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for a target table.  Only use this if the target table name is different than the source.</td></tr><tr><td>
+                 	SOURCE_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> Routers with this node_group_id will install triggers that are mapped to this router.</td></tr><tr><td>
+                 	TARGET_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The node_group_id for nodes to route data to.  Note that routing can be further narrowed down by the configured router_type and router_expression.</td></tr><tr><td>
+                 	ROUTER_TYPE                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The name of a specific type of router.  Out of the box routers are 'default','column','bsh', and 'subselect.'  Custom routers can be configured as extension points.</td></tr><tr><td>
+                 	ROUTER_EXPRESSION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> An expression that is specific to the type of router that is configured in router_type.  See the documentation for each router for more details.</td></tr><tr><td>
+                 	SYNC_ON_UPDATE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Flag that indicates that this router should route updates.</td></tr><tr><td>
+                 	SYNC_ON_INSERT                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Flag that indicates that this router should route inserts.</td></tr><tr><td>
+                 	SYNC_ON_DELETE                </td><td>INTEGER  (1)</td><td> 1</td><td>				</td><td>X</td><td> Flag that indicates that this router should route deletes.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	LAST_UPDATE_BY                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The user who last updated this entry.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when a user last updated this entry.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.14.&nbsp;ROUTER</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_trigger_router"></a>A.15.&nbsp;TRIGGER_ROUTER</h2></div></div></div>
+    
+    <p>Map a trigger to a router.</p>
+	<div class="table"><a name="table-def-trigger_router"></a><div class="table-contents">
+    	
+    	<table summary="TRIGGER_ROUTER" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	TRIGGER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The id of a trigger.</td></tr><tr><td>
+                 	ROUTER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The id of a router.</td></tr><tr><td>
+                 	INITIAL_LOAD_ORDER                </td><td>INTEGER </td><td> 1</td><td>				</td><td>X</td><td> Order sequence of this table when an initial load is sent to a node. </td></tr><tr><td>
+                 	INITIAL_LOAD_SELECT                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional expression that can be used to pair down the data selected from a table during the initial load process.</td></tr><tr><td>
+                 	PING_BACK_ENABLED                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>X</td><td> When enabled, the node will route data that originated from a node back to that node.  This attribute is only effective if sync_on_incoming_batch is set to 1.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	LAST_UPDATE_BY                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The user who last updated this entry.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when a user last updated this entry.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.15.&nbsp;TRIGGER_ROUTER</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_parameter"></a>A.16.&nbsp;PARAMETER</h2></div></div></div>
+    
+    <p>Provides a way to manage most SymmetricDS settings in the database.</p>
+	<div class="table"><a name="table-def-parameter"></a><div class="table-contents">
+    	
+    	<table summary="PARAMETER" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	EXTERNAL_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Target the parameter at a specific external id. To target all nodes, use the value of 'ALL.'</td></tr><tr><td>
+                 	NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Target the parameter at a specific node group id. To target all groups, use the value of 'ALL.'</td></tr><tr><td>
+                 	PARAM_KEY                </td><td>VARCHAR  (80)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The name of the parameter.</td></tr><tr><td>
+                 	PARAM_VALUE                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The value of the parameter.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.16.&nbsp;PARAMETER</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_registration_redirect"></a>A.17.&nbsp;REGISTRATION_REDIRECT</h2></div></div></div>
+    
+    <p>Provides a way for a centralized registration server to redirect registering nodes to their prospective parent node in a multi-tiered deployment.</p>
+	<div class="table"><a name="table-def-registration_redirect"></a><div class="table-contents">
+    	
+    	<table summary="REGISTRATION_REDIRECT" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	REGISTRANT_EXTERNAL_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Maps the external id of a registration request to a different parent node.</td></tr><tr><td>
+                 	REGISTRATION_NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The node_id of the node that a registration request should be redirected to.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.17.&nbsp;REGISTRATION_REDIRECT</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_registration_request"></a>A.18.&nbsp;REGISTRATION_REQUEST</h2></div></div></div>
+    
+    <p>Audits when a node registers or attempts to register.</p>
+	<div class="table"><a name="table-def-registration_request"></a><div class="table-contents">
+    	
+    	<table summary="REGISTRATION_REQUEST" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The node group that this node belongs to, such as 'store'.</td></tr><tr><td>
+                 	EXTERNAL_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> A domain-specific identifier for context within the local system. For example, the retail store number. </td></tr><tr><td>
+                 	STATUS                </td><td>CHAR  (2)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The current status of the registration attempt.  Valid statuses are NR (not registered), IG (ignored), OK (sucessful)</td></tr><tr><td>
+                 	HOST_NAME                </td><td>VARCHAR  (60)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The host name of a workstation or server. If more than one instance of SymmetricDS runs on the same server, then this value can be a 'server id' specified by -Druntime.symmetric.cluster.server.id</td></tr><tr><td>
+                 	IP_ADDRESS                </td><td>VARCHAR  (21)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The ip address for the host.</td></tr><tr><td>
+                 	ATTEMPT_COUNT                </td><td>INTEGER </td><td> 0</td><td>				</td><td>&nbsp;</td><td> The number of registration attempts.</td></tr><tr><td>
+                 	REGISTERED_NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> A unique identifier for a node.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	LAST_UPDATE_BY                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The user who last updated this entry.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when a user last updated this entry.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.18.&nbsp;REGISTRATION_REQUEST</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_trigger_hist"></a>A.19.&nbsp;TRIGGER_HIST</h2></div></div></div>
+    
+    <p>A history of a table's definition and the trigger used to capture data from the table. When a database trigger captures a data change, it references a trigger_hist entry so it is possible to know which columns the data represents. trigger_hist entries are made during the sync trigger process, which runs at each startup, each night in the syncTriggersJob, or any time the syncTriggers() JMX method is manually invoked. A new entry is made when a table definition or a trigger definition is changed, which causes a database trigger to be created or rebuilt.</p>
+	<div class="table"><a name="table-def-trigger_hist"></a><div class="table-contents">
+    	
+    	<table summary="TRIGGER_HIST" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	TRIGGER_HIST_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a trigger_hist entry</td></tr><tr><td>
+                 	TRIGGER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> Unique identifier for a trigger</td></tr><tr><td>
+                 	SOURCE_TABLE_NAME                </td><td>VARCHAR  (50)</td><td> </td><td>				</td><td>X</td><td> The name of the source table that will have a trigger installed to watch for data changes.</td></tr><tr><td>
+                 	SOURCE_CATALOG_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The catalog name where the source table resides.</td></tr><tr><td>
+                 	SOURCE_SCHEMA_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The schema name where the source table resides.</td></tr><tr><td>
+                 	NAME_FOR_UPDATE_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name used when the insert trigger was created.</td></tr><tr><td>
+                 	NAME_FOR_INSERT_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name used when the update trigger was created.</td></tr><tr><td>
+                 	NAME_FOR_DELETE_TRIGGER                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name used when the delete trigger was created.</td></tr><tr><td>
+                 	TABLE_HASH                </td><td>BIGINT </td><td>&nbsp;</td><td>				</td><td>X</td><td>  A hash of the table definition, used to detect changes in the definition.</td></tr><tr><td>
+                 	TRIGGER_ROW_HASH                </td><td>BIGINT </td><td>&nbsp;</td><td>				</td><td>X</td><td> A hash of the trigger definition.  If changes are detected to the values that affect a trigger definition, then the trigger will be regenerated.</td></tr><tr><td>
+                 	COLUMN_NAMES                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>X</td><td> The column names defined on the table. The column names are stored in comma-separated values (CSV) format.</td></tr><tr><td>
+                 	PK_COLUMN_NAMES                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>X</td><td> The primary key column names defined on the table. The column names are stored in comma-separated values (CSV) format.</td></tr><tr><td>
+                 	LAST_TRIGGER_BUILD_REASON                </td><td>CHAR  (1)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The following reasons for a change are possible: New trigger that has not been created before (N); Schema changes in the table were detected (S); Configuration changes in Trigger (C); Trigger was missing (T).</td></tr><tr><td>
+                 	ERROR_MESSAGE                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Record any errors or warnings that occurred when attempting to build the trigger.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	INACTIVE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td>     The date and time when a trigger was inactivated.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.19.&nbsp;TRIGGER_HIST</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_data"></a>A.20.&nbsp;DATA</h2></div></div></div>
+    
+    <p>The captured data change that occurred to a row in the database. Entries in data are created by database triggers.</p>
+	<div class="table"><a name="table-def-data"></a><div class="table-contents">
+    	
+    	<table summary="DATA" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	DATA_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier for a data.</td></tr><tr><td>
+                 	TABLE_NAME                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name of the table in which a change occurred that this entry records.</td></tr><tr><td>
+                 	EVENT_TYPE                </td><td>CHAR  (1)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The type of event captured by this entry. For triggers, this is the change that occurred, which is 'I' for insert, 'U' for update, or 'D' for delete. Other events include: 'R' for reloading the entire table (or subset of the table) to the node; 'S' for running dynamic SQL at the node, which is used for adhoc administration.</td></tr><tr><td>
+                 	ROW_DATA                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The captured data change from the synchronized table. The column values are stored in comma-separated values (CSV) format.</td></tr><tr><td>
+                 	PK_DATA                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The primary key values of the captured data change from the synchronized table. This data is captured for updates and deletes. The primary key values are stored in comma-separated values (CSV) format.</td></tr><tr><td>
+                 	OLD_DATA                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The captured data values prior to the update.  The column values are stored in CSV format.</td></tr><tr><td>
+                 	TRIGGER_HIST_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>				</td><td>X</td><td> The foreign key to the trigger_hist entry that contains the primary key and column names for the table being synchronized.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The channel that this data belongs to, such as 'prices'</td></tr><tr><td>
+                 	TRANSACTION_ID                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> An optional transaction identifier that links multiple data changes together as the same transaction.</td></tr><tr><td>
+                 	SOURCE_NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> If the data was inserted by a SymmetricDS data loader, then the id of the source node is record so that data is not re-routed back to it.</td></tr><tr><td>
+                 	EXTERNAL_DATA                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> A field that can be populated by a trigger that uses the EXTERNAL_SELECT</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when this entry was created.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.20.&nbsp;DATA</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_data_ref"></a>A.21.&nbsp;DATA_REF</h2></div></div></div>
+    
+    <p>Used only when routing.data.reader.type is set to 'ref.'  Table that tracks the last known data_id that has been processed.  This table is used so that joins to find unprocessed data can be better optimized.</p>
+	<div class="table"><a name="table-def-data_ref"></a><div class="table-contents">
+    	
+    	<table summary="DATA_REF" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	REF_DATA_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The data_id that can be used to limit the search of the data table to rows that are greater than this data_id value.</td></tr><tr><td>
+                 	REF_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The time when the ref_data_id was recorded. It is used as the base time to calculate timeouts for gaps in the data_ids.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.21.&nbsp;DATA_REF</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_data_gap"></a>A.22.&nbsp;DATA_GAP</h2></div></div></div>
+    
+    <p>Used only when routing.data.reader.type is set to 'gap.'  Table that tracks gaps in the data table so that they may be processed efficiently, if data shows up.  Gaps can show up in the data table if a database transaction is rolled back.</p>
+	<div class="table"><a name="table-def-data_gap"></a><div class="table-contents">
+    	
+    	<table summary="DATA_GAP" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	START_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The first missing data_id from the data table where a gap is detected.  This could be the last data_id inserted plus one.</td></tr><tr><td>
+                 	END_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The last missing data_id from the data table where a gap is detected.  If the start_id is the last data_id inserted plus one, then this field is filled in with a -1.</td></tr><tr><td>
+                 	STATUS                </td><td>CHAR  (2)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> GP, SK, or FL.  GP means there is a detected gap.  FL means that the gap has been filled.  SK means that the gap has been skipped either because the gap expired or because no database transaction was detected which means that no data will be committed to fill in the gap.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when this entry was created.</td></tr><tr><td>
+                 	LAST_UPDATE_HOSTNAME                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The host who last updated this entry.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>X</td><td> Timestamp when a user last updated this entry.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.22.&nbsp;DATA_GAP</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_data_event"></a>A.23.&nbsp;DATA_EVENT</h2></div></div></div>
+    
+    <p>Represents routing of a data row to one or more nodes. Entries in data_event are created by database triggers. </p>
+	<div class="table"><a name="table-def-data_event"></a><div class="table-contents">
+    	
+    	<table summary="DATA_EVENT" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	DATA_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Id of the data to be routed.</td></tr><tr><td>
+                 	BATCH_ID                </td><td>INTEGER </td><td> -1</td><td>PK				</td><td>X</td><td> The node_id of the node that is to receive the data.</td></tr><tr><td>
+                 	ROUTER_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The router_id of the router that routed this data_event.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when this entry was created.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.23.&nbsp;DATA_EVENT</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_outgoing_batch"></a>A.24.&nbsp;OUTGOING_BATCH</h2></div></div></div>
+    
+    <p>Used for tracking the sending a collection of data to a node in the system. A new outgoing_batch is created and given a status of 'NE'. After sending the outgoing_batch to its target node, the status becomes 'SE'. The node responds with either a success status of 'OK' or an error status of 'ER'. An error while sending to the node also results in an error status of 'ER' regardless of whether the node sends that acknowledgement. </p>
+	<div class="table"><a name="table-def-outgoing_batch"></a><div class="table-contents">
+    	
+    	<table summary="OUTGOING_BATCH" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	BATCH_ID                </td><td>INTEGER </td><td>&nbsp;</td><td>PK				</td><td>X</td><td> A unique id for the batch.</td></tr><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The node that this batch is targeted at.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The channel that this batch is part of.</td></tr><tr><td>
+                 	STATUS                </td><td>CHAR  (2)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The current status of the Batch can be currently routing (RE), newly created and ready for replication (NE), being queried from the database (QE), sent to a Node (SE), ready to be loaded (LD) and acknowledged as successful (OK) or error (ER).</td></tr><tr><td>
+                 	LOAD_FLAG                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> A flag that indicates that this batch is part of an initial load.</td></tr><tr><td>
+                 	ERROR_FLAG                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> A flag that indicates that this batch was in error during the last synchornization attempt.</td></tr><tr><td>
+                 	BYTE_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of bytes that were sent as part of this batch.</td></tr><tr><td>
+                 	EXTRACT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times this an attempt to extract this batch occurred.</td></tr><tr><td>
+                 	SENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times this batch was sent.  A batch can be sent multiple times if an ACK is not received.</td></tr><tr><td>
+                 	LOAD_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times an attempt to load this batch occurred.</td></tr><tr><td>
+                 	DATA_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of data_events that are part of this batch.</td></tr><tr><td>
+                 	RELOAD_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of reload events that are part of this batch.</td></tr><tr><td>
+                 	INSERT_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of insert events that are part of this batch.</td></tr><tr><td>
+                 	UPDATE_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of update events that are part of this batch.</td></tr><tr><td>
+                 	DELETE_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of delete events that are part of this batch.</td></tr><tr><td>
+                 	OTHER_EVENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of other event types that are part of this batch.  This includes any events types that are not a reload, insert, update or delete event type.</td></tr><tr><td>
+                 	ROUTER_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent creating this batch.</td></tr><tr><td>
+                 	NETWORK_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent transfering this batch across the network.</td></tr><tr><td>
+                 	FILTER_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent in filters processing data.</td></tr><tr><td>
+                 	LOAD_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent loading the data into the target database.</td></tr><tr><td>
+                 	EXTRACT_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent extracting the data out of the source database.</td></tr><tr><td>
+                 	SQL_STATE                </td><td>VARCHAR  (10)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> For a status of error (ER), this is the XOPEN or SQL 99 SQL State.</td></tr><tr><td>
+                 	SQL_CODE                </td><td>INTEGER </td><td> 0</td><td>				</td><td>X</td><td> For a status of error (ER), this is the error code from the database that is specific to the vendor. </td></tr><tr><td>
+                 	SQL_MESSAGE                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> For a status of error (ER), this is the error message that describes the error.</td></tr><tr><td>
+                 	FAILED_DATA_ID                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> For a status of error (ER), this is the data_id that was being processed when the batch failed.</td></tr><tr><td>
+                 	LAST_UPDATE_HOSTNAME                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The host name of the process that last did work on this batch.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when a process last updated this entry.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when this entry was created.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.24.&nbsp;OUTGOING_BATCH</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_incoming_batch"></a>A.25.&nbsp;INCOMING_BATCH</h2></div></div></div>
+    
+    <p>The incoming_batch is used for tracking the status of loading an outgoing_batch from another node. Data is loaded and commited at the batch level. The status of the incoming_batch is either successful (OK) or error (ER). </p>
+	<div class="table"><a name="table-def-incoming_batch"></a><div class="table-contents">
+    	
+    	<table summary="INCOMING_BATCH" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	BATCH_ID                </td><td>INTEGER  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The id of the outgoing_batch that is being loaded.</td></tr><tr><td>
+                 	NODE_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node_id of the source of the batch being loaded.</td></tr><tr><td>
+                 	CHANNEL_ID                </td><td>VARCHAR  (20)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The channel_id of the batch being loaded.</td></tr><tr><td>
+                 	STATUS                </td><td>CHAR  (2)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The current status of the batch can be loading (LD), successfully loaded (OK), in error (ER) or skipped (SK)</td></tr><tr><td>
+                 	ERROR_FLAG                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> A flag that indicates that this batch was in error during the last synchornization attempt.</td></tr><tr><td>
+                 	NETWORK_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent transfering this batch across the network.</td></tr><tr><td>
+                 	FILTER_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent in filters processing data.</td></tr><tr><td>
+                 	DATABASE_MILLIS                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of milliseconds spent loading the data into the target database.</td></tr><tr><td>
+                 	FAILED_ROW_NUMBER                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> For a status of error (ER), this is the data_id that was being processed when the batch failed.</td></tr><tr><td>
+                 	BYTE_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of bytes that were sent as part of this batch.</td></tr><tr><td>
+                 	STATEMENT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of statements run to load this batch.</td></tr><tr><td>
+                 	FALLBACK_INSERT_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times an update was turned into an insert because the data was not already in the target database.</td></tr><tr><td>
+                 	FALLBACK_UPDATE_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times an insert was turned into an update because a data row already existed in the target database.</td></tr><tr><td>
+                 	MISSING_DELETE_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> THe number of times a delete did not effect the database because the row was already deleted.</td></tr><tr><td>
+                 	SKIP_COUNT                </td><td>BIGINT </td><td> 0</td><td>				</td><td>X</td><td> The number of times a batch was sent and skipped because it had already been loaded according to incoming_batch</td></tr><tr><td>
+                 	SQL_STATE                </td><td>VARCHAR  (10)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> For a status of error (ER), this is the XOPEN or SQL 99 SQL State.</td></tr><tr><td>
+                 	SQL_CODE                </td><td>INTEGER </td><td> 0</td><td>				</td><td>X</td><td> For a status of error (ER), this is the error code from the database that is specific to the vendor. </td></tr><tr><td>
+                 	SQL_MESSAGE                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> For a status of error (ER), this is the error message that describes the error.</td></tr><tr><td>
+                 	LAST_UPDATE_HOSTNAME                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The host name of the process that last did work on this batch.</td></tr><tr><td>
+                 	LAST_UPDATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when a process last updated this entry.</td></tr><tr><td>
+                 	CREATE_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when this entry was created.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.25.&nbsp;INCOMING_BATCH</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_lock"></a>A.26.&nbsp;LOCK</h2></div></div></div>
+    
+    <p>Contains semaphores that are set when processes run, so that only one server can run a process at a time.  Enable this feature by using the cluster.lock.during.xxxx parameters.</p>
+	<div class="table"><a name="table-def-lock"></a><div class="table-contents">
+    	
+    	<table summary="LOCK" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	LOCK_ACTION                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The process that needs a lock.</td></tr><tr><td>
+                 	LOCKING_SERVER_ID                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The name of the server that currently has a lock.  This is typically a host name, but it can be overridden using the -Druntime.symmetric.cluster.server.id=name System property.</td></tr><tr><td>
+                 	LOCK_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The time a lock is aquired.  Use the cluster.lock.timeout.ms to specify a lock timeout period.</td></tr><tr><td>
+                 	LAST_LOCK_TIME                </td><td>TIMESTAMP </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Timestamp when a process last updated this entry.</td></tr><tr><td>
+                 	LAST_LOCKING_SERVER_ID                </td><td>VARCHAR  (255)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> The server id of the process that last did work on this batch.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.26.&nbsp;LOCK</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_transform_table"></a>A.27.&nbsp;TRANSFORM_TABLE</h2></div></div></div>
+    
+    <p>Defines a data loader transformation which can be used to map arbitrary tables and columns to other tables and columns.</p>
+	<div class="table"><a name="table-def-transform_table"></a><div class="table-contents">
+    	
+    	<table summary="TRANSFORM_TABLE" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	TRANSFORM_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier of a specific transform.</td></tr><tr><td>
+                 	SOURCE_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node group where data changes should be captured.</td></tr><tr><td>
+                 	TARGET_NODE_GROUP_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> The node group where data changes will be sent.</td></tr><tr><td>
+                 	TRANSFORM_POINT                </td><td>VARCHAR  (10)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The point during the transport of captured data that a transform happens.  Support values are EXTRACT or LOAD.</td></tr><tr><td>
+                 	SOURCE_CATALOG_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the catalog the configured table is in.</td></tr><tr><td>
+                 	SOURCE_SCHEMA_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the schema a configured table is in.</td></tr><tr><td>
+                 	SOURCE_TABLE_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>X</td><td> The name of the source table that will be transformed.</td></tr><tr><td>
+                 	TARGET_CATALOG_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for the catalog a target table is in. Only use this if the target table is not in the default catalog.</td></tr><tr><td>
+                 	TARGET_SCHEMA_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name of the schema a target table is in. Only use this if the target table is not in the default schema.</td></tr><tr><td>
+                 	TARGET_TABLE_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Optional name for a target table.  Use this if the target table name is different than the source.</td></tr><tr><td>
+                 	UPDATE_FIRST                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> If true, the target actions are attempted as updates first, regardless of whether the source operation was an insert or an update.</td></tr><tr><td>
+                 	DELETE_ACTION                </td><td>VARCHAR  (10)</td><td>&nbsp;</td><td>				</td><td>X</td><td> An action to take upon delete of a row.</td></tr><tr><td>
+                 	TRANSFORM_ORDER                </td><td>INTEGER </td><td> 1</td><td>				</td><td>X</td><td> Specifies the order in which to apply transforms if more than one target operation occurs.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.27.&nbsp;TRANSFORM_TABLE</b></p></div><br class="table-break">
+</div>
+
+	  	    
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="table_transform_column"></a>A.28.&nbsp;TRANSFORM_COLUMN</h2></div></div></div>
+    
+    <p>Defines the column mappings and optional data transformation for a data loader transformation </p>
+	<div class="table"><a name="table-def-transform_column"></a><div class="table-contents">
+    	
+    	<table summary="TRANSFORM_COLUMN" border="1"><colgroup><col width="115"><col width="50"><col width="30"><col width="18"><col width="18"><col width="150"></colgroup><thead><tr><th>Name</th><th>Type / Size</th><th>Default</th><th>PK FK</th><th>not null</th><th>Description</th></tr></thead><tbody><tr><td>
+                 	TRANSFORM_ID                </td><td>VARCHAR  (50)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Unique identifier of a specific transform.</td></tr><tr><td>
+                 	INCLUDE_ON                </td><td>CHAR  (1)</td><td> *</td><td>PK				</td><td>X</td><td> Indicates whether this mapping is included during an insert (I), update (U), delete (D) operation at the target based on the dml type at the source.  A value of * represents the fact that you want to map the column for all operations.</td></tr><tr><td>
+                 	TARGET_COLUMN_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>PK				</td><td>X</td><td> Name of the target column.</td></tr><tr><td>
+                 	SOURCE_COLUMN_NAME                </td><td>VARCHAR  (128)</td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> Name of the source column.</td></tr><tr><td>
+                 	PK                </td><td>INTEGER  (1)</td><td> 0</td><td>				</td><td>&nbsp;</td><td> Indicates whether this mapping defines a primary key to be used to identify the target row.  At least one row must be defined as a pk for each transform_id.</td></tr><tr><td>
+                 	TRANSFORM_TYPE                </td><td>VARCHAR  (50)</td><td> copy</td><td>				</td><td>&nbsp;</td><td> The name of a specific type of transform.  Custom transformers can be configured as extension points.</td></tr><tr><td>
+                 	TRANSFORM_EXPRESSION                </td><td>LONGVARCHAR </td><td>&nbsp;</td><td>				</td><td>&nbsp;</td><td> An expression that is specific to the type of transform that is configured in transform_type.  See the documentation for each transformer for more details.</td></tr><tr><td>
+                 	TRANSFORM_ORDER                </td><td>INTEGER </td><td> 1</td><td>				</td><td>X</td><td> Specifies the order in which to apply transforms if more than one target operation occurs.</td></tr></tbody></table>
+	</div><p class="title"><b>Table&nbsp;A.28.&nbsp;TRANSFORM_COLUMN</b></p></div><br class="table-break">
+</div>
+
+	  
+</div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="30%" align="left"><a accesskey="p" href="administration.html">Prev</a>&nbsp;</td><td width="40%" align="center"><a accesskey="h" href="user-guide.html">Home</a></td><td width="30%" align="right">&nbsp;<a accesskey="n" href="parameters.html">Next</a></td></tr><tr><td width="30%" align="left" valign="top">Chapter&nbsp;7.&nbsp;Administration&nbsp;</td><td width="40%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.symmetricds.org/" title="SymmetricDS">SymmetricDS
+                                        </a></span></td><td width="30%" align="right" valign="top">&nbsp;Appendix&nbsp;B.&nbsp;Parameters</td></tr></table></div></body></html>

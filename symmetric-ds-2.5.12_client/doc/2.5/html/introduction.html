@@ -1,0 +1,265 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;1.&nbsp;Introduction</title><link rel="stylesheet" href="css/docbook-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="up" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="prev" href="pr01.html" title="Preface"><link rel="next" href="tutorial.html" title="Chapter&nbsp;2.&nbsp;Hands-on Tutorial"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" id="banner"><a style="border:none;" href="http://www.symmetricds.org/" title="SymmetricDS User Guide"><img style="border:none;" alt="SymmetricDS" src="images/banner-logo.gif"></a></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="introduction"></a>Chapter&nbsp;1.&nbsp;Introduction</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="introduction.html#definition">1.1. What is SymmetricDS?</a></span></dt><dt><span class="section"><a href="introduction.html#background">1.2. Background</a></span></dt><dt><span class="section"><a href="introduction.html#d4e57">1.3. SymmetricDS Features</a></span></dt><dd><dl><dt><span class="section"><a href="introduction.html#notification">1.3.1. Notification Schemes</a></span></dt><dt><span class="section"><a href="introduction.html#bi-sync">1.3.2. Two-Way Table Synchronization</a></span></dt><dt><span class="section"><a href="introduction.html#data-channels">1.3.3. Data Channels</a></span></dt><dt><span class="section"><a href="introduction.html#transactions">1.3.4. Transaction Awareness</a></span></dt><dt><span class="section"><a href="introduction.html#plugins">1.3.5. Data Filtering and Rerouting</a></span></dt><dt><span class="section"><a href="introduction.html#transports">1.3.6. HTTP(S) Transport</a></span></dt><dt><span class="section"><a href="introduction.html#jmx">1.3.7. Remote Management</a></span></dt></dl></dd><dt><span class="section"><a href="introduction.html#requirements">1.4. System Requirements</a></span></dt><dt><span class="section"><a href="introduction.html#whats-new">1.5. What's new in SymmetricDS 2</a></span></dt></dl></div>
+    
+    
+        <p>This User Guide will introduce both basic and advanced concepts in the configuration
+            of SymmetricDS. By the end of this chapter, you will have a better understanding of SymmetricDS' capabilities, and
+            many of its basic concepts.</p>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="definition"></a>1.1.&nbsp;What is SymmetricDS?</h2></div></div></div>
+            
+            <p>SymmetricDS is an asynchronous data replication software package that supports multiple subscribers and
+                bi-directional synchronization. It uses web and database technologies to replicate tables between relational
+                databases, in near real time if desired. The software was designed to scale for a large number of databases, work across
+                low-bandwidth connections, and withstand periods of network outage.  The software can be installed as a standalone process, as a web application in a Java application server, or it
+                can be embedded into another Java application.</p>
+            <p>
+                A single installation of SymmetricDS attached to a target database
+                is called a <span class="emphasis"><em>node</em></span>.
+                A node is initialized by a properties file and is configured by inserting configuration data into a series of
+                database tables. It then creates database triggers on the application tables to be synchronized so that database
+                events are captured for delivery to other SymmetricDS nodes.
+            </p>
+            <p>
+                In most databases, the transaction id is also captured by the database triggers so that the insert, update, and delete 
+                events can be replicated transactionally via the transport layer to other nodes.  The transport layer is typically a CSV protocol over HTTP or HTTPS.
+            </p>
+            <p>
+                SymmetricDS supports synchronization across different database platforms through the concept of <span class="emphasis"><em>Database
+                Dialects</em></span>. A Database Dialect is an abstraction layer that SymmetricDS uses to insulate the main synchronization
+                logic from database-specific implementation details.
+            </p>
+            <p>
+            In addition to synchronization, SymmetricDS is also capable of performing fairly complex <span class="emphasis"><em>transformations</em></span> of
+            data as the synchronization data is loaded into a target database.  The transformations can be used to merge source data,
+            make multiple copies of source data across multiple target tables, set defaults in the target tables, etc.  The types of transformation
+            can also be extended to create even more custom transformations. 
+            </p>
+            <p>
+                SymmetricDS is extendable through extension points.  Extension points are custom, reusable Java code that are
+                configured via XML.  Extension points hook into key points in the life-cycle of a synchronization to allow custom 
+                behavior to be injected.  Extension points allow custom behavior such as: publishing data to other sources, transforming data,
+                and taking different actions based on the content or status of a synchronization.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="background"></a>1.2.&nbsp;Background</h2></div></div></div>
+            
+            <p>The idea of SymmetricDS was born from a real-world need. Several of the original developers were, several years
+                ago, implementing a commercial Point of Sale (POS) system for a large retailer. The development team came to the
+                conclusion that the software available for trickling back transactions to corporate headquarters 
+                (frequently known as the 'central office' or 'general office')
+                did not meet the
+                project needs. The list of project requirements made finding the ideal solution difficult:</p>
+            <div class="itemizedlist"><ul type="disc"><li>
+                    <p> Sending and receiving data with up to 2000 stores during peak holiday loads.</p>
+                </li><li>
+                    <p> Supporting one database platform at the store and a different one at the central office.</p>
+                </li><li>
+                    <p> Synchronizing some data in one direction, and other data in both directions.</p>
+                </li><li>
+                    <p> Filtering out sensitive data and re-routing it to a protected database.</p>
+                </li><li>
+                    <p> Preparing the store database with an initial load of data from the central office.</p>
+                </li></ul></div>
+            <p> The team ultimately created a custom solution that met the requirements and led to a successful project. From
+                this work came the knowledge and experience that SymmetricDS benefits from today.</p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d4e57"></a>1.3.&nbsp;SymmetricDS Features</h2></div></div></div>
+            
+            <p>At a high level, SymmetricDS comes with a number of features that you are likely to need or want when doing data
+                synchronization. A majority of these features were created as a direct result of real-world use of SymmetricDS in
+                production settings.</p>
+       
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="notification"></a>1.3.1.&nbsp;Notification Schemes</h3></div></div></div>
+            
+            <p>
+                After a change to the database is recorded, the SymmetricDS nodes interested in the change are notified. Change
+                notification is configured to perform either a
+                <span class="emphasis"><em>push</em></span>
+                (trickle-back) or a
+                <span class="emphasis"><em>pull</em></span>
+                (trickle-poll) of data. When several nodes target their changes to a central node, it is efficient to push the
+                changes instead of waiting for the central node to pull from each source node. If the network configuration protects
+                a node with a firewall, a pull configuration could allow the node to receive data changes that might otherwise be
+                blocked using push. The frequency of the change notification is configurable and defaults to once per minute.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="bi-sync"></a>1.3.2.&nbsp;Two-Way Table Synchronization</h3></div></div></div>
+            
+            <p> In practice, much of the data in a typical synchronization requires synchronization in just one direction.
+                For example, a retail store sends its sales transactions to a
+                central office, and the central office sends its stock items and pricing to the store. Other data may synchronize in both
+                directions. For example, the retail store sends the central office an inventory document, and the central office
+                updates the document status, which is then sent back to the store. SymmetricDS supports bi-directional or two-way table synchronization
+                and avoids getting into update loops by only recording data changes outside of synchronization.</p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="data-channels"></a>1.3.3.&nbsp;Data Channels</h3></div></div></div>
+            
+            <p> SymmetricDS supports the concept of <span class="emphasis"><em>channels</em></span> of data.  
+                Data synchronization is defined at the table (or table subset) level, and each managed table can be assigned to a
+                <span class="emphasis"><em>channel</em></span> that helps control the flow of data. A channel is a category of data that can be enabled, prioritized and
+                synchronized independently of other channels. For example, in a retail environment, users may be waiting for
+                inventory documents to update while a promotional sale event updates a large number of items. If processed in
+                order, the item updates would delay the inventory updates even though the data is unrelated. By assigning changes to the item
+                tables to an <span class="emphasis"><em>item</em></span> channel and inventory tables' changes to an <span class="emphasis"><em>inventory</em></span> channel, the changes are
+                processed independently so inventory can get through despite the large amount of item data.</p>  Channels are discussed
+                in more detail in <a href="planning.html#choosing-channels" title="3.5.&nbsp;Choosing Data Channels">Section&nbsp;3.5, &#8220;Choosing Data Channels&#8221;</a>.
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="transactions"></a>1.3.4.&nbsp;Transaction Awareness</h3></div></div></div>
+            
+            <p> Many databases provide a unique transaction identifier associated with the rows that are committed together as a transaction.
+                SymmetricDS stores the transaction identifier, along with the data that changed, so it can play back the transaction exactly
+                as it occurred originally. This means the target database maintains the same transactional integrity as its source. Support for
+                transaction identification for supported databases is documented in the appendix of this guide.</p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="plugins"></a>1.3.5.&nbsp;Data Filtering and Rerouting</h3></div></div></div>
+            
+            <p>
+                Using SymmetricDS, data can be filtered as it is recorded, extracted, and loaded.
+                </p><div class="itemizedlist"><ul type="disc"><li>
+                        <p>
+                            Data routing is accomplished by assigning a router type to a  <a href="data-model.html#table_router" title="A.14.&nbsp;ROUTER">ROUTER</a> configuration.
+                            Routers are responsible for identifying what target nodes captured changes should be delivered to.  Custom 
+                            routers are possible by providing a class implementing <code class="literal">IDataRouter</code>. 
+                        </p>
+                    </li><li>
+                        <p>
+                            As data changes are loaded in the target database, a class implementing
+                            <a href="extensions.html#extensions-data-loader-filter" title="6.2.&nbsp;IDataLoaderFilter">IDataLoaderFilter</a>
+                            can change the data in a column or route it somewhere else. One possible use might be to route credit
+                            card data to a secure database and blank it out as it loads into a centralized sales database. The
+                            filter can also prevent data from reaching the database altogether, effectively replacing the default
+                            data loading process.
+                        </p>
+                    </li><li>
+                        <p>
+                            Columns can be excluded from synchronization so they are never recorded when the table is changed. As
+                            data changes are loaded into the target database, a class implementing
+                            <code class="literal">IColumnFilter</code>
+                            can  remove a column altogether from the synchronization. For example, an employee table may be
+                            synchronized to a retail store database, but the employee's password is only synchronized on the
+                            initial insert.
+                        </p>
+                    </li><li>
+                        <p>
+                            As data changes are extracted from the source database, a class implementing the
+                            <code class="literal">IExtractorListener</code>
+                            interface is called to filter data or route it somewhere else. By default, SymmetricDS provides a
+                            handler that transforms and streams data as CSV. Optionally, an alternate implementation may be
+                            provided to take some other action on the extracted data.
+                        </p>
+                    </li></ul></div><p>
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="transports"></a>1.3.6.&nbsp;HTTP(S) Transport</h3></div></div></div>
+            
+            <p>
+                By default, SymmetricDS uses web-based HTTP or HTTPS in a style called Representation State Transfer (REST).  It is
+                lightweight and easy to manage. A series of filters are also provided to enforce authentication and to restrict
+                the number of simultaneous synchronization streams. The
+                <code class="literal">ITransportManager</code>
+                interface allows other transports to be implemented. 
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="jmx"></a>1.3.7.&nbsp;Remote Management</h3></div></div></div>
+            
+            <p> Administration functions are exposed through Java Management Extensions (JMX) and can be accessed from the
+                Java JConsole or through an application server. Functions include opening registration, reloading data, purging
+                old data, and viewing batches. A number of configuration and runtime properties are available to be viewed as
+                well.</p>
+            <p> SymmetricDS also provides functionality to send SQL events through the same synchronization mechanism that is
+                used to send data. The data payload can be any SQL statement. The event is processed and acknowledged just like
+                any other event type.</p>
+        </div>
+    
+     </div>
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="requirements"></a>1.4.&nbsp;System Requirements</h2></div></div></div>
+        
+        <p> SymmetricDS is written in Java 5 and requires a Java SE Runtime Environment (JRE) or Java SE Development Kit (JDK)
+            version 5.0 or above.</p>
+        <p> Any database with trigger technology and a JDBC driver has the potential to run SymmetricDS. The database is
+            abstracted through a <span class="emphasis"><em>Database Dialect</em></span> in order to support specific features of each database. The following Database
+            Dialects have been included with this release:</p>
+        <div class="itemizedlist"><ul type="disc"><li>
+                <p>MySQL version 5.0.2 and above</p>
+            </li><li>
+                <p>Oracle version 8.1.7 and above</p>
+            </li><li>
+                <p>PostgreSQL version 8.2.5 and above</p>
+            </li><li>
+                <p>Sql Server 2005</p>
+            </li><li>
+                <p>HSQLDB 1.8</p>
+            </li><li>
+                <p>H2 1.x</p>
+            </li><li>
+                <p>Apache Derby 10.3.2.1 and above</p>
+            </li><li>
+                <p>IBM DB2 9.5</p>
+            </li><li>
+                <p>Firebird 2.0 and above</p>
+            </li></ul></div>
+        <p>
+            See <a href="databases.html" title="Appendix&nbsp;C.&nbsp;Database Notes">Appendix&nbsp;C, <i xmlns:xlink="http://www.w3.org/1999/xlink">Database Notes</i></a>,          
+            for compatibility notes and other details for your specific database.
+        </p>
+    </div>
+<div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="whats-new"></a>1.5.&nbsp;What's new in SymmetricDS 2</h2></div></div></div>
+            
+            <p> SymmetricDS 2 builds upon the existing SymmetricDS 1.x software base and incorporates a number of
+                architectural changes and performance improvements. If you are brand new to SymmetricDS, you can safely skip this
+                section. If you have used SymmetricDS 1.x in the past, this section summarizes the key differences you will
+                encounter when moving to SymmetricDS 2.</p>
+            <p>The first significant architectural change involves SymmetricDS's use of triggers. In 1.x, triggers capture and
+                record data changes as well as the nodes to which the changes must be applied as row inserts into the <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a>
+                table. Thus, the number of row-inserts grows linearly with the number of client nodes. This can lead to an obvious
+                performance issue as the number of nodes increases. In addition, the problem is made worse at times due to
+                synchronizing nodes updating the same <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a> table as part
+                 of the batching process while the row-inserts are
+                being created.</p>
+            <p>In SymmetricDS 2, triggers capture <span class="emphasis"><em>only</em></span> data changes, not the node-specific details. The node-specific
+                row-inserts are replaced with a new routing mechanism that does both the routing and the batching of data on one
+                thread. Thus, the real-time inserts into <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a> by applications using synchronized
+                tables have been eliminated, and database performance is therefore improved. The database contention on <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a>
+                has also been eliminated, since the router job is the only thread inserting data into that table. 
+                The only other access to the <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a>
+                table is from selects by synchronizing nodes.</p>
+            <p>
+                As a result of these changes, we gain the following benefits:
+                </p><div class="itemizedlist"><ul type="disc"><li>Synchronizing client nodes will spend less time connected to a server node,</li><li>Applications updating database tables that are being synchronized to a large number of nodes will
+                        not degrade in performance as more nodes are added, and</li><li> There should be almost no database contention on the <code class="literal">data_event</code> table, unlike the possible contention in 1.X.
+                    </li></ul></div><p>
+                Because routing no longer takes place in the SymmetricDS database triggers, a new mechanism for routing was needed. In
+                SymmetricDS 1.x, the <code class="literal">node_select</code> expression was used for specifying the desired data routing. It was a SQL
+                expression that qualified the insert into <a href="data-model.html#table_data_event" title="A.23.&nbsp;DATA_EVENT">DATA_EVENT</a> from the SymmetricDS triggers. In SymmetricDS 2 there is a
+                new extension point called the data router. Data routers are configured in the router table with a <code class="literal">router_type</code> and
+                a <code class="literal">router_expression</code>. Several different routers have been provided to serve the majority of users' routing
+                needs, but the framework is in place for a SymmetricDS programmer to develop domain- or application-specific
+                routers.  See <a href="configuration.html#configuration-router" title="4.6.2.&nbsp;Router">Section&nbsp;4.6.2, &#8220;Router&#8221;</a> for a complete list of provided routers.
+            </p>
+          
+            <p>Since the routing and capturing of data are now performed with two separate mechanisms, the two concepts have
+                been separated into separate configuration tables in the database, with a join table (<a href="data-model.html#table_trigger_router" title="A.15.&nbsp;TRIGGER_ROUTER">TRIGGER_ROUTER</a>) specifying
+                the relationships between routing (<a href="data-model.html#table_router" title="A.14.&nbsp;ROUTER">ROUTER</a>) and capturing of data (<a href="data-model.html#table_trigger" title="A.13.&nbsp;TRIGGER">TRIGGER</a>). This solves a long standing issue with
+                some databases which only allow one trigger per table. On those database platforms, we can now route data in
+                multiple directions since we only require one SymmetricDS trigger to capture data. This also helps performance in
+                those scenarios, since we only capture the data once instead of once per routing instance.</p>
+            <p>
+                As part of the new routing job, we have introduced another new extension point to allow more flexibility in the
+                way data events get batched. A batch is the unit by with captured data is sent and committed on target nodes. In
+                SymmetricDS 2, batching is now configured on the channel configuration table. This provides additional flexibility
+                for batching:
+                </p><div class="itemizedlist"><ul type="disc"><li>Batching can have the traditional SymmetricDS 1.x behavior of batching up to a max batch size, but
+                        never breaking on a database transaction boundary.</li><li>Batching can be completely tied to a database transaction. One batch per database transaction.
+                    </li><li>Batching can ignore database transactions altogether and always batch based on a max batch size.
+                    </li></ul></div><p>
+            </p>
+            <p> Another significant change to note in SymmetricDS 2 is the removal of the incoming and outgoing batch history
+                tables. This change was made because it was found that over 95% of the time the statistics the end user truly
+                wanted to see were those for the most recent synchronization attempt, not to mention that the outgoing batch
+                history table was difficult to query. The most valuable information in the batch history tables, the batch
+                statistics, have been moved over to the batch tables themselves. The statistics in the batch tables now always represent the
+                latest synchronization attempt.</p>
+        </div>
+</div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="30%" align="left"><a accesskey="p" href="pr01.html">Prev</a>&nbsp;</td><td width="40%" align="center"><a accesskey="h" href="user-guide.html">Home</a></td><td width="30%" align="right">&nbsp;<a accesskey="n" href="tutorial.html">Next</a></td></tr><tr><td width="30%" align="left" valign="top">Preface&nbsp;</td><td width="40%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.symmetricds.org/" title="SymmetricDS">SymmetricDS
+                                        </a></span></td><td width="30%" align="right" valign="top">&nbsp;Chapter&nbsp;2.&nbsp;Hands-on Tutorial</td></tr></table></div></body></html>

@@ -1,0 +1,5 @@
+java -classpath symmetric-core-2.5.12.jar;lib/hsqldb.jar org.hsqldb.server.Server
+
+java -classpath symmetric-core-2.5.12.jar;lib/hsqldb.jar org.hsqldb.Server -database.0 file:localdb -dbname.0 localdb -port 9999
+
+java -jar lib/sqltool.jar --rcFile=sqltool.rc localdb hsql_createTables.sql

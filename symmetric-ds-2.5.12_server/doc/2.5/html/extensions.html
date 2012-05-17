@@ -1,0 +1,245 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;6.&nbsp;Extending SymmetricDS</title><link rel="stylesheet" href="css/docbook-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="up" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="prev" href="advanced-topics.html" title="Chapter&nbsp;5.&nbsp;Advanced Topics"><link rel="next" href="administration.html" title="Chapter&nbsp;7.&nbsp;Administration"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" id="banner"><a style="border:none;" href="http://www.symmetricds.org/" title="SymmetricDS User Guide"><img style="border:none;" alt="SymmetricDS" src="images/banner-logo.gif"></a></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="extensions"></a>Chapter&nbsp;6.&nbsp;Extending SymmetricDS</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="extensions.html#extensions-parameter-filter">6.1. IParameterFilter</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-data-loader-filter">6.2. IDataLoaderFilter</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-table-column-filter">6.3. ITableColumnFilter</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-batch-listener">6.4. IBatchListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-acknowledge-event-listener">6.5. IAcknowledgeEventListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-reload-listener">6.6. IReloadListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-extractor-filter">6.7. IExtractorFilter</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-sync-url-extension">6.8. ISyncUrlExtension</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-node-id-generator">6.9. INodeIdGenerator</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-trigger-creation-listener">6.10. ITriggerCreationListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-batch-algorithm">6.11. IBatchAlgorithm</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-data-router">6.12. IDataRouter</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-heartbeat-listener">6.13. IHeartbeatListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-offline-client-listener">6.14. IOfflineClientListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-offline-server-listener">6.15. IOfflineServerListener</a></span></dt><dt><span class="section"><a href="extensions.html#extensions-node-password">6.16. INodePasswordFilter</a></span></dt></dl></div>
+    
+     
+      
+        <p>
+             SymmetricDS may be extended via a plug-in like architecture where extension point interfaces 
+             may be implemented by a custom class and registered with the synchronization engine.  All supported extension 
+             points extend the IExtensionPoint interface.  The currently available extension points are documented in the following sections.  
+        </p>
+        <p>
+             When the synchronization engine starts up, a Spring 
+             post processor searches the Spring ApplicationContext for any registered classes which implement 
+             IExtensionPoint.  An IExtensionPoint designates whether it should be auto registered or not.  If the extension point 
+             is to be auto registered then the post processor registers the known interface with the appropriate service.
+        </p>
+        <p>
+             The INodeGroupExtensionPoint interface may be optionally implemented to designate that auto registered 
+             extension points should only be auto registered with specific node groups.
+             </p><pre class="programlisting">/**
+ * Only apply this extension point to the 'root' node group.
+ */
+ public String[] getNodeGroupIdsToApplyTo() {
+     return new String[] { "root" };
+ }
+</pre><p>             
+        </p>
+        <p>
+             SymmetricDS will look for Spring configured extensions in the application Classpath by importing any Spring 
+             XML configuration files found matching the following pattern: <code class="literal">META-INF/services/symmetric-*-ext.xml</code>.  When packaged in
+             a jar file the <code class="literal">META-INF</code> directory should be at the root of the jar file.  When packaged in a war file, the <code class="literal">META-INF</code> directory
+             should be in the <code class="literal">WEB-INF/classes</code> directory.
+        </p>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-parameter-filter"></a>6.1.&nbsp;IParameterFilter</h2></div></div></div>
+            
+            <p>
+                Parameter values can be specified in code using a parameter filter.  Note that there can be only one parameter
+                filter per engine instance.  The IParameterFilter replaces the deprecated IRuntimeConfig from prior releases.
+                </p><pre class="programlisting">public class MyParameterFilter 
+    implements IParameterFilter, INodeGroupExtensionPoint {
+
+    /**
+     * Only apply this filter to stores
+     */
+    public String[] getNodeGroupIdsToApplyTo() {
+        return new String[] { "store" };
+    }
+
+    public String filterParameter(String key, String value) {
+        // look up a store number from an already existing properties file.
+        if (key.equals(ParameterConstants.EXTERNAL_ID)) {
+            return StoreProperties.getStoreProperties().
+              getProperty(StoreProperties.STORE_NUMBER);
+        } 
+        return value;
+    }
+
+    public boolean isAutoRegister() {
+        return true;
+    }
+
+}</pre><p> 
+            </p>
+        </div>        
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-data-loader-filter"></a>6.2.&nbsp;IDataLoaderFilter</h2></div></div></div>
+                     
+            <p>
+                Data can be filtered as it is loaded into the target database.  It can also be
+                filtered when
+                it is extracted from the source database.
+            
+                As data is loaded into the target database, a filter can change the
+                data in a column or save it somewhere else.  It can also specify by the
+                return value of the function call that the data loader should continue on 
+                and load the data (by returning true) or ignore it (by returning false). One 
+                possible use of the filter might be to
+                route credit card data to a secure database and blank it out as it loads 
+                into a less-restricted reporting database.
+            </p>
+            <p>
+                An IDataLoaderContext is passed to each of the callback methods.  A new 
+                context is created for each synchronization.  The context provides methods to 
+                lookup column indexes by column name, get table meta data, and access to 
+                old data if the <code class="literal">sync_column_level</code> flag is enabled.  The context also provides a means 
+                to share data during a synchronization between different rows of data that are 
+                committed in a  database transaction and are in the same channel.  It does so by 
+                providing a context cache which can be populated by the extension point.
+            </p>  
+            <p>
+                Many times the IDataLoaderFilter will be combined with the IBatchListener.  The 
+                XmlPublisherFilter (in the <code class="literal">org.jumpmind.symmetric.ext</code> package) is a good example 
+                of using the combination of the two extension points in order to create XML messages 
+                to be published to JMS.
+            </p>          
+            <p>
+                A class implementing the IDataLoaderFilter interface is injected onto the
+                DataLoaderService in order to receive callbacks when data is inserted,
+                updated, or deleted.
+                
+                </p><pre class="programlisting">public MyFilter implements IDataLoaderFilter {
+                
+    public boolean isAutoRegister() {
+        return true;
+    }
+ 
+    public boolean filterInsert(IDataLoaderContext context,
+        String[] columnValues) {
+        return true;
+    }
+    
+    public boolean filterUpdate(IDataLoaderContext context, 
+        String[] columnValues, String[] keyValues) {
+        return true;
+    }
+    
+    public void filterDelete(IDataLoaderContext context, 
+        String[] keyValues) {
+        return true;
+    }
+
+}</pre><p>
+            </p>
+            <p>
+                The filter class is specified as a Spring-managed bean.  A custom Spring XML file
+                is specified as follows in a jar at <code class="literal">META-INF/services/symmetric-myfilter-ext.xml</code>.
+                
+                </p><pre class="programlisting">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;
+ 
+    &lt;bean id="myFilter" class="com.mydomain.MyFilter"/&gt;
+     
+&lt;/beans&gt;</pre><p>
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-table-column-filter"></a>6.3.&nbsp;ITableColumnFilter</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to filter out specific columns from
+            use by the dataloader. Only one column filter may be added per target table.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-batch-listener"></a>6.4.&nbsp;IBatchListener</h2></div></div></div>
+            
+            <p>
+            This extension point is called whenever a batch has completed loading but before
+            the transaction has committed.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-acknowledge-event-listener"></a>6.5.&nbsp;IAcknowledgeEventListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to receive callback events when a batch is acknowledged.  
+            The callback for this listener happens at the point of extraction.
+            </p>
+        </div>                
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-reload-listener"></a>6.6.&nbsp;IReloadListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to listen in and take
+            action before or after a reload is requested for a Node.  The callback for this listener
+            happens at the point of extraction.
+            </p>
+        </div>                
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-extractor-filter"></a>6.7.&nbsp;IExtractorFilter</h2></div></div></div>
+            
+            <p>
+            This extension point is called after data has been extracted, but before it has been streamed.  It
+            has the ability to inspect each row of data to take some action and indicate, if necessary, that the
+            row should not be streamed.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-sync-url-extension"></a>6.8.&nbsp;ISyncUrlExtension</h2></div></div></div>
+            
+            <p>
+             This extension point is used to select an appropriate URL based on
+             the URI provided in the <code class="literal">sync_url</code> column of <code class="literal">sym_node</code>.
+            </p>
+            <p>
+             To use this extension point configure the sync_url for a node with the
+             protocol of ext://beanName. The beanName is the name you give the extension
+             point in the extension xml file.
+            </p>
+        </div>        
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-node-id-generator"></a>6.9.&nbsp;INodeIdGenerator</h2></div></div></div>
+            
+            <p>
+             This extension point allows SymmetricDS users to implement their own algorithms for how 
+             node ids and passwords are generated or selected during the registration process.  There may be 
+             only one node generator per SymmetricDS instance.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-trigger-creation-listener"></a>6.10.&nbsp;ITriggerCreationListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to get status callbacks during trigger creation.
+            </p>
+        </div>       
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-batch-algorithm"></a>6.11.&nbsp;IBatchAlgorithm</h2></div></div></div>
+            
+            <p>
+            Implement this extension point and set the name of the Spring bean on the batch_algorithm column of the Channel table to use.
+            This extension point gives fine grained control over how a channel is batched.
+            </p>
+        </div>                   
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-data-router"></a>6.12.&nbsp;IDataRouter</h2></div></div></div>
+            
+            <p>
+            Implement this extension point and set the name of the Spring bean on the router_type column
+            of the Router table to use.  This extension point gives the ability to programatically decide
+            which nodes data should be routed to.
+            </p>
+        </div>  
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-heartbeat-listener"></a>6.13.&nbsp;IHeartbeatListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to get callbacks during the heartbeat job.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-offline-client-listener"></a>6.14.&nbsp;IOfflineClientListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to get callbacks for offline events on client nodes.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-offline-server-listener"></a>6.15.&nbsp;IOfflineServerListener</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to get callbacks for offline events detected on a server node during monitoring of client nodes.
+            </p>
+        </div>
+        <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions-node-password"></a>6.16.&nbsp;INodePasswordFilter</h2></div></div></div>
+            
+            <p>
+            Implement this extension point to intercept the saving and rendering of the node password.
+            </p>
+        </div>        
+    </div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="30%" align="left"><a accesskey="p" href="advanced-topics.html">Prev</a>&nbsp;</td><td width="40%" align="center"><a accesskey="h" href="user-guide.html">Home</a></td><td width="30%" align="right">&nbsp;<a accesskey="n" href="administration.html">Next</a></td></tr><tr><td width="30%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Advanced Topics&nbsp;</td><td width="40%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.symmetricds.org/" title="SymmetricDS">SymmetricDS
+                                        </a></span></td><td width="30%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Administration</td></tr></table></div></body></html>

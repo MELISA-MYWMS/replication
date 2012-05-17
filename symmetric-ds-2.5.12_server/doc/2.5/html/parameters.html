@@ -1,0 +1,673 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Appendix&nbsp;B.&nbsp;Parameters</title><link rel="stylesheet" href="css/docbook-style.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><link rel="start" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="up" href="user-guide.html" title="SymmetricDS 2 User Guide"><link rel="prev" href="data-model.html" title="Appendix&nbsp;A.&nbsp;Data Model"><link rel="next" href="databases.html" title="Appendix&nbsp;C.&nbsp;Database Notes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" id="banner"><a style="border:none;" href="http://www.symmetricds.org/" title="SymmetricDS User Guide"><img style="border:none;" alt="SymmetricDS" src="images/banner-logo.gif"></a></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="parameters"></a>Appendix&nbsp;B.&nbsp;Parameters</h2></div></div></div>
+    
+    <p>
+        There are two kinds of parameters that can be used to configure the behavior of SymmetricDS:
+        <span class="emphasis"><em>Startup Parameters</em></span> and <span class="emphasis"><em>Runtime Parameters</em></span>.
+        Startup Parameters are required to be in a system property or a property file, while 
+        Runtime Parameters can also be found in the Parameter table from the database.
+        Parameters are re-queried from their source at a configured interval and can 
+        also be refreshed on demand by using the JMX API.  
+        The following table shows the source of parameters and the hierarchy of precedence.
+        </p><div class="table"><a name="d4e4257"></a><div class="table-contents">
+            
+            <table summary="Parameter Locations" border="1"><colgroup><col width="115"><col width="50"><col width="220"></colgroup><thead><tr><th>Location</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td>
+                            <span class="emphasis"><em>symmetric-default.properties</em></span>
+                        </td><td>Y</td><td>
+                            Packaged inside symmetric-ds.jar file. This file has all the default
+                            settings along with descriptions.
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>symmetric.properties</em></span>
+                        </td><td>N</td><td>
+                            Provided by the end user on the classpath. The first
+                            symmetric.properties found on the classpath will be used.
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>symmetric.properties</em></span>
+                        </td><td>N</td><td>
+                            Provided by the end user in the current system user's user.home
+                            directory.
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>named properties file 1</em></span>
+                        </td><td>N</td><td>
+                            Provided by the end user as a Java system property (i.e.
+                            -Dsymmetric.override.properties.file.1=file://my.properties) or in
+                            the constructor of a
+                            <code class="literal">SymmetricEngine</code>
+                            .
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>named properties file 2</em></span>
+                        </td><td>N</td><td>
+                            Provided by the end user as a Java system property (i.e.
+                            -Dsymmetric.override.properties.file.2=classpath://my.properties) or
+                            in the constructor of a
+                            <code class="literal">SymmetricEngine</code>
+                            .
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>Java System Properties</em></span>
+                        </td><td>N</td><td>
+                            Any SymmetricDS property can be passed in as a -D property to the
+                            runtime. It will take precedence over any properties file property.
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>Parameter table</em></span>
+                        </td><td>N</td><td>
+                            A table which contains SymmetricDS parameters. Parameters can be targeted at a specific node group and
+                            even at a specific external id.  These settings will take precedence over all of the above.
+                        </td></tr><tr><td>
+                            <span class="emphasis"><em>IParameterFilter</em></span>
+                        </td><td>N</td><td>
+                            An extension point which allows parameters to be sourced from another location or customized.  
+                            These settings will take precedence over all of the above.
+                        </td></tr></tbody></table>
+        </div><p class="title"><b>Table&nbsp;B.1.&nbsp;Parameter Locations</b></p></div><p><br class="table-break">
+    </p>
+
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap01-startup"></a>B.1.&nbsp;Startup Parameters</h2></div></div></div>
+        
+        <p>
+            Startup parameters are read once from properties files and apply only during start up.
+            The following properties are used:
+    
+            </p><div class="variablelist"><dl><dt><span class="term">
+                        <span><strong class="command">db.jndi.name</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The name of the database connection pool to use, which is registered in the JNDI
+                            directory tree of the application server. It is recommended that this DataSource is
+                            NOT transactional, because SymmetricDS will handle its own transactions. If NOT using
+                            a JNDI connection pool, you must provide information about the database connection
+                            using the
+                            <code class="literal">db.driver</code>
+                            ,
+                            <code class="literal">db.url</code>
+                            ,
+                            <code class="literal">db.user</code>
+                            , and
+                            <code class="literal">db.password</code>
+                            properties instead, which will create a pool of connections using the
+                            <code class="literal">db.pool</code>
+                            properties. [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.driver</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The class name of the JDBC driver. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;com.mysql.jdbc.Driver&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.url</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The JDBC URL used to connect to the database. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored.
+                            [&nbsp;Default:&nbsp;jdbc:mysql://localhost/symmetric&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.user</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The database username, which is used to login, create, and update SymmetricDS tables.
+                            To use an encrypted username, see <a href="advanced-topics.html#encrypted-passwords" title="5.7.&nbsp;Encrypted Passwords">Section&nbsp;5.7, &#8220;Encrypted Passwords&#8221;</a>.
+                            If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;symmetric&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.password</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The password for the database user. 
+                            To use an encrypted password, see <a href="advanced-topics.html#encrypted-passwords" title="5.7.&nbsp;Encrypted Passwords">Section&nbsp;5.7, &#8220;Encrypted Passwords&#8221;</a>.
+                            If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.pool.initial.size</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The initial size of the connection pool. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;5&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.pool.max.active</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The maximum number of connections that will be allocated in the pool. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;10&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.pool.max.wait.millis</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is how long a request for a connection from the datasource will wait before
+                            giving up. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;30000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.pool.min.evictable.idle.millis</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is how long a connection can be idle before it will be evicted. If
+                            <code class="literal">db.jndi.name</code>
+                            is set, this property is ignored. [&nbsp;Default:&nbsp;120000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.spring.bean.name</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The name of a Spring bean to use as the DataSource.  If you want to use a different
+                            DataSource other than the provided DBCP version that SymmetricDS uses out of the box,
+                            you may set this to be the Spring bean name of your DataSource.
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.sql.query.timeout.seconds</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The timeout in seconds for queries running on the database.
+                            [&nbsp;Default:&nbsp;300&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.tx.timeout.seconds</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is how long the default transaction time is. This needs to be fairly big to
+                            account for large data loads. [&nbsp;Default:&nbsp;7200&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.jdbc.streaming.results.fetch.size</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the default fetch size for streaming result sets into memory from the
+                            database. [&nbsp;Default:&nbsp;1000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.default.schema</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the schema that will be used for metadata lookup. Some dialect automatically 
+                            figure this out using database specific SQL to get the current schema. [&nbsp;Default:&nbsp;&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">db.metadata.ignore.case</strong></span>
+                    </span></dt><dd>
+                        <p>
+                             Indicates that case should be ignored when looking up references to 
+                             tables using the metadata api. [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">auto.config.database</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, the configuration and runtime tables used by SymmetricDS are
+                            automatically created during startup. [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">auto.upgrade</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, when symmetric starts up it will try to upgrade tables to latest version.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">auto.sync.configuration</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, create triggers for the SymmetricDS configuration table that 
+                            will synchronize changes to node groups that pull from the node where this 
+                            property is set.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">https.allow.self.signed.certs</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, a Symmetric client node to accept self signed
+                            certificates.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">http.basic.auth.username</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If specified, a Symmetric client node will use basic authentication
+                            when communicating with its server node using the given user name.
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">http.basic.auth.password</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If specified, the password used for basic authentication.
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">embedded.webserver.basic.auth.username</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If specified, the username for basic authentication for an embedded server
+                            or standalone server node.  Specifying the username and password is all
+                            that's needed to enable basic authentication for an embedded server or
+                            standalone server node.
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">embedded.webserver.basic.auth.password</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If specified, the password for basic authentication for an embedded server
+                            or standalone server node.
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">https.verified.server.names</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            A list of comma separated server names that will always verify when using https.
+                            This is useful if the URL's hostname and the server's identification hostname 
+                            don't match exactly using the default rules for the JRE.  A special value
+                            of "all" may be specified to allow all hostnames to verify.
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">sync.table.prefix</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            When symmetric tables are created and accessed, this is the prefix to use for the
+                            table name. [&nbsp;Default:&nbsp;sym&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">engine.name</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the engine name. This should be set if you have more than one engine running
+                            in the same JVM. It is used to name the JMX management bean.
+                            [&nbsp;Default:&nbsp;Default&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.push.job</strong></span>
+                    </span></dt><dd>
+                        <p>Whether the push job is enabled for this node. [&nbsp;Default:&nbsp;true]</p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.pull.job</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether the pull job is enabled for this node. [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.purge.job</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether the purge job is enabled for this node. [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.synctriggers.job</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether the sync triggers job is enabled for this node.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.heartbeat.job</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether the heartbeat job is enabled for this node. The heartbeat job simply inserts
+                            an event to update the heartbeat_time column on the node table for the current node.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">start.watchdog.job</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether the watchdog job is enabled for this node. The watchdog job monitors child
+                            nodes to detect if they are offline.  Refer to 
+                            <a href="extensions.html#extensions-offline-server-listener" title="6.15.&nbsp;IOfflineServerListener">Section&nbsp;6.15, &#8220;IOfflineServerListener&#8221;</a> for
+                            more information.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.purge.period.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is how often the purge job will be run. [&nbsp;Default:&nbsp;600000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.statflush.period.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is how often accumulated statistics will be flushed out to the database from memory.
+                            [&nbsp;Default:&nbsp;600000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">web.base.servlet.path</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The base servlet path for when embedding SymmetricDS with in another web application.
+                            [&nbsp;Default:&nbsp;&nbsp;]
+                        </p>
+                    </dd></dl></div><p>
+        </p>            
+    </div>
+
+    <div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ap01-runtime"></a>B.2.&nbsp;Runtime Parameters</h2></div></div></div>
+        
+        <p>
+            Runtime parameters are read periodically from properties files or the database.
+            The following properties are used:
+    
+            </p><div class="variablelist"><dl><dt><span class="term">
+                        <span><strong class="command">auto.registration</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, registration is opened automatically for nodes requesting it.
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">auto.reload</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If this is true, a reload is automatically sent to nodes when they register.
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">auto.update.node.values.from.properties</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Update the node row in the database from the local properties during a heartbeat operation.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">http.concurrent.workers.max</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the number of HTTP concurrent push/pull requests symmetric will accept. This
+                            is controlled by the NodeConcurrencyFilter.  The maximum number of database connections 
+                            in the database pool should be set to twice this number.[&nbsp;Default:&nbsp;20&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">offline.node.detection.period.minutes</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the minimum number of minutes that a child node has been offline before taking action.  Refer to 
+                            <a href="extensions.html#extensions-offline-server-listener" title="6.15.&nbsp;IOfflineServerListener">Section&nbsp;6.15, &#8220;IOfflineServerListener&#8221;</a> for
+                            more information.  
+                            [&nbsp;Default:&nbsp;120&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">outgoing.batches.peek.ahead.window.after.max.size</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the maximum number of events that will be peeked at to look for additional transaction rows after
+                            the max batch size is reached.  The more concurrency in your db and the longer the transaction takes the 
+                            bigger this value might have to be. 
+                            [&nbsp;Default:&nbsp;100&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">incoming.batches.skip.duplicates</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether or not to skip duplicate batches that are received. A duplicate batch is
+                            identified by the batch ID already existing in the incoming batch table. If this
+                            happens, it means an acknowledgement was lost due to failure or there is a bug.
+                            Accepting a duplicate batch in this case can mean overwriting data with old data.
+                            Another cause of duplicates is when the batch sequence number is reset, which might
+                            happen in a lab environement. Skipping a duplicate batch in this case would prevent
+                            data changes from loading. Generally, in a production envionment, this setting should
+                            be true. [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">num.of.ack.retries</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the number of times we will attempt to send an ACK back to the remote node
+                            when pulling and loading data.
+                            [&nbsp;Default:&nbsp;5&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">time.between.ack.retries.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the amount of time to wait between trying to send an ACK back to the remote node
+                            when pulling and loading data.
+                            [&nbsp;Default:&nbsp;5000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">dataextractor.enabled</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Enable or disable all data extraction at a node for all channels other than the config channel.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">dataloader.enabled</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Enable or disable all data loading at a node for all channels other than the config channel.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">dataloader.enable.fallback.update</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If an insert is received, but the row already exists, then
+                            try an update instead.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">dataloader.enable.fallback.insert</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If an update is received, but it affects no rows, then try to insert
+                            instead.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">dataloader.allow.missing.delete</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If a delete is received, but it affects no rows, then continue.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">cluster.server.id</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Set this if you want to give your server a unique name to be used to identify which server did what action.  Typically useful when running in 
+                            a clustered environment.  This is currently used by the ClusterService when locking for a node.
+                            [&nbsp;Default:&nbsp;&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">cluster.lock.timeout.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Time limit of lock before it is considered abandoned and can be broken.
+                            [&nbsp;Default:&nbsp;1800000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">cluster.lock.enabled</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">initial.load.delete.first</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Set this if tables should be purged prior to an initial load.
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">initial.load.create.first</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Set this if tables (and their indexes) should be created prior to an initial load.
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">http.timeout.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Sets both the connection and read timeout on the internal HttpUrlConnection.
+                            [&nbsp;Default:&nbsp;600000s&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">http.compression</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Whether or not to use compression over HTTP connections.
+                            Currently, this setting only affects the push connection of the source node.
+                            Compression on a pull is enabled using a filter in the web.xml for the PullServlet.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">web.compression.disabled</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Disable compression from occurring on Servlet communication.  This property only
+                            affects the outbound HTTP traffic streamed by the PullServlet and PushServlet.
+                            [&nbsp;Default:&nbsp;false&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">compression.level</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Set the compression level this node will use when compressing synchronization payloads.
+                            Valid values include: NO_COMPRESSION = 0,  BEST_SPEED = 1, BEST_COMPRESSION = 9, DEFAULT_COMPRESSION = -1
+                            [&nbsp;Default:&nbsp;-1&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">compression.strategy</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Set the compression strategy this node will use when compressing synchronization payloads.
+                            Valid values include: FILTERED = 1, HUFFMAN_ONLY = 2, DEFAULT_STRATEGY = 0
+                            [&nbsp;Default:&nbsp;0&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">stream.to.file.enabled</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Save data to the file system before transporting it to the client or loading
+                            it to the database if the number of bytes is past a certain threshold.  This allows
+                            for better compression and better use of database and network resources.  Statistics
+                            in the batch tables will be more accurate if this is set to true because each timed
+                            operation is independent of the others.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">stream.to.file.threshold.bytes</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If stream.to.file.enabled is true, then the threshold number of bytes at which a file 
+                            will be written is controlled by this property.  Note that for a synchronization the
+                            entire payload of the synchronization will be buffered in memory up to this number (at
+                            which point it will be written and continue to stream to disk)
+                            [&nbsp;Default:&nbsp;32767&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.random.max.start.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            When starting jobs, symmetric attempts to randomize the start time to spread out load.
+                            This is the maximum wait period before starting a job.
+                            [&nbsp;Default:&nbsp;10000&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">purge.retention.minutes</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the retention for how long synchronization data will be kept in the
+                            SymmetricDS synchronization tables. Note that data will be purged only if the purge
+                            job is enabled. [&nbsp;Default:&nbsp;7200&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">statistic.retention.minutes</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is the retention for how long statistic data will be kept in the
+                            SymmetricDS staistic table. Note that data will be purged only if the purge
+                            job is enabled. [&nbsp;Default:&nbsp;7200&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.route.period.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>This is how often the route job will be run. [&nbsp;Default:&nbsp;10000&nbsp;]</p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.push.period.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>This is how often the push job will be run. [&nbsp;Default:&nbsp;60000&nbsp;]</p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.pull.period.time.ms</strong></span>
+                    </span></dt><dd>
+                        <p>This is how often the pull job will be run. [&nbsp;Default:&nbsp;60000&nbsp;]</p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">job.synctriggers.aftermidnight.minutes</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If scheduled, the sync triggers job will run nightly. This is how long after midnight
+                            that job will run. [&nbsp;Default:&nbsp;15&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">schema.version</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            This is hook to give the user a mechanism to indicate the schema version that is being
+                            synchronized. This property is only valid if you use the default IRuntimeConfiguration
+                            implementation. [&nbsp;Default:&nbsp;?&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">registration.url</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The URL where this node can connect for registration to receive its configuration.
+                            This property is only valid if you use the default IRuntimeConfiguration
+                            implementation. [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">sync.url</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The URL where this node can be contacting for synchronization. 
+                            [&nbsp;Default:&nbsp;http://localhost:8080/sync&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">group.id</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The node group id for this node. [&nbsp;Default:&nbsp;default&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">external.id</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            The secondary identifier for this node that has meaning to the system where it is
+                            deployed. While the node id is a generated sequence number, the external ID could have
+                            meaning in the user's domain, such as a retail store number. 
+                            [&nbsp;Default:&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">transport.type</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            Specify the transport type. Supported values currently include: http, internal.
+                            [&nbsp;Default:&nbsp;http&nbsp;]
+                        </p>
+                    </dd><dt><span class="term">
+                        <span><strong class="command">hsqldb.initialize.db</strong></span>
+                    </span></dt><dd>
+                        <p>
+                            If using the HsqlDbDialect, this property indicates whether Symmetric should setup the embedded database properties or if an
+                            external application will be doing so.
+                            [&nbsp;Default:&nbsp;true&nbsp;]
+                        </p>
+                    </dd></dl></div><p>
+        </p>
+    </div>
+</div><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="30%" align="left"><a accesskey="p" href="data-model.html">Prev</a>&nbsp;</td><td width="40%" align="center"><a accesskey="h" href="user-guide.html">Home</a></td><td width="30%" align="right">&nbsp;<a accesskey="n" href="databases.html">Next</a></td></tr><tr><td width="30%" align="left" valign="top">Appendix&nbsp;A.&nbsp;Data Model&nbsp;</td><td width="40%" align="center"><span style="color:white;font-size:90%;"><a href="http://www.symmetricds.org/" title="SymmetricDS">SymmetricDS
+                                        </a></span></td><td width="30%" align="right" valign="top">&nbsp;Appendix&nbsp;C.&nbsp;Database Notes</td></tr></table></div></body></html>
