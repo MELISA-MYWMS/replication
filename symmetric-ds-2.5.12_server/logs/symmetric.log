@@ -1,0 +1,153 @@
+2012-05-17 13:59:29,737 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 13:59:29,737 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-17 14:00:08,472 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 14:00:08,472 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-17 14:00:11,753 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-17 14:00:12,862 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-17 14:00:20,550 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-17 14:00:23,143 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-17 14:00:28,862 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 14:00:28,862 INFO  [SymmetricLauncher] [main] Option: name=run-sql, value={insert_sample.sql}
+2012-05-17 14:00:31,878 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-17 14:00:33,612 ERROR [SqlScript] [main] 
+insert into sym_channel 
+(channel_id, processing_order, max_batch_size, enabled, description)
+values('mywms_channel', 1, 100000, 1, 'mywms symmetricds channel') failed to execute.
+java.sql.SQLException: ORA-00001: unique constraint (JBOSS.SYS_C0030927) violated
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:113)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:288)
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:754)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+	at oracle.jdbc.driver.T4CStatement.executeForRows(T4CStatement.java:963)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1192)
+	at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1731)
+	at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1701)
+	at org.apache.commons.dbcp.DelegatingStatement.execute(DelegatingStatement.java:261)
+	at org.jumpmind.symmetric.db.SqlScript$1.doInConnection(SqlScript.java:200)
+	at org.jumpmind.symmetric.db.SqlScript$1.doInConnection(SqlScript.java:163)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:341)
+	at org.jumpmind.symmetric.db.SqlScript.execute(SqlScript.java:163)
+	at org.jumpmind.symmetric.db.SqlScript.execute(SqlScript.java:158)
+	at org.jumpmind.symmetric.SymmetricLauncher.runSql(SymmetricLauncher.java:681)
+	at org.jumpmind.symmetric.SymmetricLauncher.executeOptions(SymmetricLauncher.java:498)
+	at org.jumpmind.symmetric.SymmetricLauncher.execute(SymmetricLauncher.java:185)
+	at org.jumpmind.symmetric.SymmetricLauncher.main(SymmetricLauncher.java:165)
+2012-05-17 14:03:59,503 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 14:03:59,503 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-17 14:04:02,690 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-17 14:04:03,581 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-17 14:04:04,300 INFO  [SymmetricDS] [main] There are SymmetricDS tables missing.  They will be auto created.
+2012-05-17 14:04:04,300 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-17 14:04:04,393 INFO  [SymmetricDS] [main] There are SymmetricDS tables that needed altered.
+2012-05-17 14:04:06,972 ERROR [SqlScript] [main] CREATE SEQUENCE seq_sym_trigger_rigger_hist_id failed to execute.
+java.sql.SQLException: ORA-00955: name is already used by an existing object
+
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:113)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:331)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:288)
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:754)
+	at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:210)
+	at oracle.jdbc.driver.T4CStatement.executeForRows(T4CStatement.java:963)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1192)
+	at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1731)
+	at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1701)
+	at org.apache.commons.dbcp.DelegatingStatement.execute(DelegatingStatement.java:261)
+	at org.jumpmind.symmetric.db.SqlScript$1.doInConnection(SqlScript.java:200)
+	at org.jumpmind.symmetric.db.SqlScript$1.doInConnection(SqlScript.java:163)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:341)
+	at org.jumpmind.symmetric.db.SqlScript.execute(SqlScript.java:163)
+	at org.jumpmind.symmetric.db.SqlScript.execute(SqlScript.java:158)
+	at org.jumpmind.symmetric.db.AbstractDbDialect.createTablesIfNecessary(AbstractDbDialect.java:737)
+	at org.jumpmind.symmetric.db.AbstractDbDialect.initTablesAndFunctions(AbstractDbDialect.java:259)
+	at org.jumpmind.symmetric.service.impl.ConfigurationService.autoConfigDatabase(ConfigurationService.java:302)
+	at org.jumpmind.symmetric.AbstractSymmetricEngine.setupDatabase(AbstractSymmetricEngine.java:357)
+	at org.jumpmind.symmetric.SymmetricLauncher.autoCreateDatabase(SymmetricLauncher.java:659)
+	at org.jumpmind.symmetric.SymmetricLauncher.executeOptions(SymmetricLauncher.java:477)
+	at org.jumpmind.symmetric.SymmetricLauncher.execute(SymmetricLauncher.java:185)
+	at org.jumpmind.symmetric.SymmetricLauncher.main(SymmetricLauncher.java:165)
+2012-05-17 14:05:29,628 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 14:05:29,628 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-17 14:05:32,565 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-17 14:05:33,393 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-17 14:05:34,097 INFO  [SymmetricDS] [main] There are SymmetricDS tables missing.  They will be auto created.
+2012-05-17 14:05:34,097 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-17 14:05:34,190 INFO  [SymmetricDS] [main] There are SymmetricDS tables that needed altered.
+2012-05-17 14:05:35,440 INFO  [SymmetricDS] [main] Done with auto update of SymmetricDS tables.
+2012-05-17 14:05:35,987 INFO  [SymmetricDS] [main] Just installed sym_blob2clob
+2012-05-17 14:05:36,065 INFO  [SymmetricDS] [main] Just installed sym_transaction_id
+2012-05-17 14:05:36,175 INFO  [SymmetricDS] [main] Just installed sym_trigger_disabled
+2012-05-17 14:05:36,253 INFO  [SymmetricDS] [main] Just installed sym_pkg_package
+2012-05-17 14:05:36,315 INFO  [SymmetricDS] [main] Just installed sym_pkg_package body
+2012-05-17 14:05:36,597 INFO  [SymmetricDS] [main] Just installed sym_wkt2geom
+2012-05-17 14:05:36,643 INFO  [SymmetricDS] [main] Auto-configuring config channel.
+2012-05-17 14:05:36,643 INFO  [SymmetricDS] [main] Auto-configuring reload channel.
+2012-05-17 14:05:36,659 INFO  [SymmetricDS] [main] Auto-configuring default channel.
+2012-05-17 14:05:36,675 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-17 14:05:43,612 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-17 14:05:43,628 INFO  [SymmetricLauncher] [main] Option: name=run-sql, value={insert_sample.sql}
+2012-05-17 14:05:46,518 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 08:43:30,440 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 08:43:30,440 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-18 08:43:33,690 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 08:43:34,737 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-18 08:43:35,549 INFO  [SymmetricDS] [main] There are SymmetricDS tables missing.  They will be auto created.
+2012-05-18 08:43:35,549 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-18 08:43:35,643 INFO  [SymmetricDS] [main] There are SymmetricDS tables that needed altered.
+2012-05-18 08:43:37,237 INFO  [SymmetricDS] [main] Done with auto update of SymmetricDS tables.
+2012-05-18 08:43:37,502 INFO  [SymmetricDS] [main] Just installed sym_blob2clob
+2012-05-18 08:43:37,580 INFO  [SymmetricDS] [main] Just installed sym_transaction_id
+2012-05-18 08:43:37,705 INFO  [SymmetricDS] [main] Just installed sym_trigger_disabled
+2012-05-18 08:43:37,768 INFO  [SymmetricDS] [main] Just installed sym_pkg_package
+2012-05-18 08:43:37,830 INFO  [SymmetricDS] [main] Just installed sym_pkg_package body
+2012-05-18 08:43:38,049 INFO  [SymmetricDS] [main] Just installed sym_wkt2geom
+2012-05-18 08:43:38,127 INFO  [SymmetricDS] [main] Auto-configuring config channel.
+2012-05-18 08:43:38,127 INFO  [SymmetricDS] [main] Auto-configuring reload channel.
+2012-05-18 08:43:38,127 INFO  [SymmetricDS] [main] Auto-configuring default channel.
+2012-05-18 08:43:38,143 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-18 08:43:42,002 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 08:43:42,002 INFO  [SymmetricLauncher] [main] Option: name=run-sql, value={insert_sample.sql}
+2012-05-18 08:43:44,862 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 09:30:51,866 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 09:30:51,881 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-18 09:30:55,491 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 09:30:56,600 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-18 09:30:57,522 INFO  [SymmetricDS] [main] There are SymmetricDS tables missing.  They will be auto created.
+2012-05-18 09:30:57,522 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-18 09:30:57,616 INFO  [SymmetricDS] [main] There are SymmetricDS tables that needed altered.
+2012-05-18 09:31:02,756 INFO  [SymmetricDS] [main] Done with auto update of SymmetricDS tables.
+2012-05-18 09:31:03,834 INFO  [SymmetricDS] [main] Just installed sym_blob2clob
+2012-05-18 09:31:03,912 INFO  [SymmetricDS] [main] Just installed sym_transaction_id
+2012-05-18 09:31:04,037 INFO  [SymmetricDS] [main] Just installed sym_trigger_disabled
+2012-05-18 09:31:04,116 INFO  [SymmetricDS] [main] Just installed sym_pkg_package
+2012-05-18 09:31:04,178 INFO  [SymmetricDS] [main] Just installed sym_pkg_package body
+2012-05-18 09:31:04,412 INFO  [SymmetricDS] [main] Just installed sym_wkt2geom
+2012-05-18 09:31:04,522 INFO  [SymmetricDS] [main] Auto-configuring config channel.
+2012-05-18 09:31:04,522 INFO  [SymmetricDS] [main] Auto-configuring reload channel.
+2012-05-18 09:31:04,522 INFO  [SymmetricDS] [main] Auto-configuring default channel.
+2012-05-18 09:31:04,537 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-18 09:31:07,787 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 09:31:07,803 INFO  [SymmetricLauncher] [main] Option: name=run-sql, value={insert_sample.sql}
+2012-05-18 09:31:10,694 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 12:32:29,991 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 12:32:30,006 INFO  [SymmetricLauncher] [main] Option: name=auto-create, value={}
+2012-05-18 12:32:33,678 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-18 12:32:34,584 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-18 12:32:35,272 INFO  [SymmetricDS] [main] There are SymmetricDS tables missing.  They will be auto created.
+2012-05-18 12:32:35,287 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-18 12:32:35,366 INFO  [SymmetricDS] [main] There are SymmetricDS tables that needed altered.
+2012-05-18 12:32:38,241 INFO  [SymmetricDS] [main] Done with auto update of SymmetricDS tables.
+2012-05-18 12:32:38,506 INFO  [SymmetricDS] [main] Just installed sym_blob2clob
+2012-05-18 12:32:38,569 INFO  [SymmetricDS] [main] Just installed sym_transaction_id
+2012-05-18 12:32:38,741 INFO  [SymmetricDS] [main] Just installed sym_trigger_disabled
+2012-05-18 12:32:38,866 INFO  [SymmetricDS] [main] Just installed sym_pkg_package
+2012-05-18 12:32:38,928 INFO  [SymmetricDS] [main] Just installed sym_pkg_package body
+2012-05-18 12:32:39,131 INFO  [SymmetricDS] [main] Just installed sym_wkt2geom
+2012-05-18 12:32:39,162 INFO  [SymmetricDS] [main] Auto-configuring config channel.
+2012-05-18 12:32:39,178 INFO  [SymmetricDS] [main] Auto-configuring reload channel.
+2012-05-18 12:32:39,178 INFO  [SymmetricDS] [main] Auto-configuring default channel.
+2012-05-18 12:32:39,194 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-18 12:32:44,037 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-18 12:32:44,037 INFO  [SymmetricLauncher] [main] Option: name=run-sql, value={insert_sample.sql}
+2012-05-18 12:32:47,053 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect

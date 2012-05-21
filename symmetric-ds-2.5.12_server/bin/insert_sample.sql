@@ -40,21 +40,21 @@ values('mywms_channel', 1, 100000, 1, 'mywms symmetricds channel');
 --
 -- Triggers
 --
-insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('JMS_MESSAGES' ,'JBOSS','JMS_MESSAGES','mywms_channel',current_timestamp,current_timestamp);
-insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('JMS_ROLES' ,'JBOSS','JMS_ROLES','mywms_channel',current_timestamp,current_timestamp);
-insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('JMS_SUBSCRIPTIONS' ,'JBOSS','JMS_SUBSCRIPTIONS','mywms_channel',current_timestamp,current_timestamp);
-insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('JMS_TRANSACTIONS' ,'JBOSS','JMS_TRANSACTIONS','mywms_channel',current_timestamp,current_timestamp);
-insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('JMS_USERS' ,'JBOSS','JMS_USERS','mywms_channel',current_timestamp,current_timestamp);
+--insert into sym_trigger 
+--(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
+--values('JMS_MESSAGES' ,'JBOSS','JMS_MESSAGES','mywms_channel',current_timestamp,current_timestamp);
+--insert into sym_trigger 
+--(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
+--values('JMS_ROLES' ,'JBOSS','JMS_ROLES','mywms_channel',current_timestamp,current_timestamp);
+--insert into sym_trigger 
+--(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
+--values('JMS_SUBSCRIPTIONS' ,'JBOSS','JMS_SUBSCRIPTIONS','mywms_channel',current_timestamp,current_timestamp);
+--insert into sym_trigger 
+--(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
+--values('JMS_TRANSACTIONS' ,'JBOSS','JMS_TRANSACTIONS','mywms_channel',current_timestamp,current_timestamp);
+--insert into sym_trigger 
+--(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
+--values('JMS_USERS' ,'JBOSS','JMS_USERS','mywms_channel',current_timestamp,current_timestamp);
 insert into sym_trigger 
 (trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
 values('LOS_AREA' ,'JBOSS','LOS_AREA','mywms_channel',current_timestamp,current_timestamp);
@@ -278,21 +278,21 @@ values('client_server_identity', 'JBOSS','client', 'server', current_timestamp, 
 -- Trigger Router Links
 --
 
-insert into sym_trigger_router 
-(trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('JMS_MESSAGES','server_client_identity', 5, current_timestamp, current_timestamp);
-insert into sym_trigger_router 
-(trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('JMS_ROLES','server_client_identity', 10, current_timestamp, current_timestamp);
-insert into sym_trigger_router 
-(trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('JMS_SUBSCRIPTIONS','server_client_identity', 15, current_timestamp, current_timestamp);
-insert into sym_trigger_router 
-(trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('JMS_TRANSACTIONS','server_client_identity', 20, current_timestamp, current_timestamp);
-insert into sym_trigger_router 
-(trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('JMS_USERS','server_client_identity', 25, current_timestamp, current_timestamp);
+--insert into sym_trigger_router 
+--(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+--values('JMS_MESSAGES','server_client_identity', 5, current_timestamp, current_timestamp);
+--insert into sym_trigger_router 
+--(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+--values('JMS_ROLES','server_client_identity', 10, current_timestamp, current_timestamp);
+--insert into sym_trigger_router 
+--(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+--values('JMS_SUBSCRIPTIONS','server_client_identity', 15, current_timestamp, current_timestamp);
+--insert into sym_trigger_router 
+--(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+--values('JMS_TRANSACTIONS','server_client_identity', 20, current_timestamp, current_timestamp);
+--insert into sym_trigger_router 
+--(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+--values('JMS_USERS','server_client_identity', 25, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
 values('LOS_AREA','server_client_identity', 30, current_timestamp, current_timestamp);
