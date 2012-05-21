@@ -19,7 +19,7 @@ values ('client', 'Client');
 insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action)
 values ('client', 'server', 'P');
 insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action)
-values ('server', 'client', 'P');
+values ('server', 'client', 'W');
 
 insert into sym_node (node_id, node_group_id, external_id, sync_enabled)
 values ('00000', 'server', '00000', 1);
@@ -260,6 +260,10 @@ insert into sym_trigger
 (trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
 values('MYWMS_ZONE' ,'JBOSS','MYWMS_ZONE','mywms_channel',current_timestamp,current_timestamp);
 
+
+
+
+
 --
 -- Routers
 --
@@ -497,3 +501,212 @@ values('MYWMS_WORKVEHICLEHISTORY','server_client_identity', 360, current_timesta
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
 values('MYWMS_ZONE','server_client_identity', 365, current_timestamp, current_timestamp);
+
+
+
+
+
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_AREA','client_server_identity', 30, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_AVISREQ','client_server_identity', 35, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_BOM','client_server_identity', 40, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_EXTINGUISHREQ','client_server_identity', 45, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_EXTORDER','client_server_identity', 50, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_FIXASSGN','client_server_identity', 55, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_GOODSRECEIPT','client_server_identity', 60, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_GOODSRECEIPT_LOS_AVISREQ','client_server_identity', 65, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_GRRPOSITION','client_server_identity', 70, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_INVENTORY','client_server_identity', 75, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ITEMDATA_NUMBER','client_server_identity', 80, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_JRXML','client_server_identity', 85, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_LOCATIONCLUSTER','client_server_identity', 90, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ORDER','client_server_identity', 95, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ORDERRECEIPT','client_server_identity', 100, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ORDERRECEIPTPOS','client_server_identity', 105, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ORDERREQ','client_server_identity', 110, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ORDERREQPOS','client_server_identity', 115, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_OUTPOS','client_server_identity', 120, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_OUTREQ','client_server_identity', 125, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_PICKRECEIPT','client_server_identity', 130, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_PICKRECEIPTPOS','client_server_identity', 135, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_PICKREQ','client_server_identity', 140, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_PICKREQPOS','client_server_identity', 145, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_RACK','client_server_identity', 150, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_RACKLOCATION','client_server_identity', 155, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_REPLENISHREQ','client_server_identity', 160, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_REPLENISHREQ_LOS_STORLOC','client_server_identity', 165, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_SEQUENCENUMBER','client_server_identity', 170, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_SERVICECONF','client_server_identity', 175, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_SLLABEL','client_server_identity', 180, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STOCKRECORD','client_server_identity', 185, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STOCKTAKING','client_server_identity', 190, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STOCKTAKINGORDER','client_server_identity', 195, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STOCKTAKINGRECORD','client_server_identity', 200, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STORAGELOCATIONTYPE','client_server_identity', 205, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STORAGEREQ','client_server_identity', 210, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_STORLOC','client_server_identity', 215, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_SULABEL','client_server_identity', 220, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_SYSPROP','client_server_identity', 225, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_TYPECAPACITYCONSTRAINT','client_server_identity', 230, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_UL_RECORD','client_server_identity', 235, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ULADVICE','client_server_identity', 240, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_ULADVICEPOS','client_server_identity', 245, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_UNITLOAD','client_server_identity', 250, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('LOS_WORK_TYPE','client_server_identity', 255, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_AREA','client_server_identity', 260, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_CLEARINGITEM','client_server_identity', 265, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_CLIENT','client_server_identity', 270, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_DOCUMENT','client_server_identity', 275, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_ITEMDATA','client_server_identity', 280, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_ITEMUNIT','client_server_identity', 285, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_LOGITEM','client_server_identity', 290, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_LOT','client_server_identity', 295, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_PLUGINCONFIGURATION','client_server_identity', 300, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_REQUEST','client_server_identity', 305, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_ROLE','client_server_identity', 310, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_STOCKUNIT','client_server_identity', 315, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_UNITLOAD','client_server_identity', 320, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_UNITLOADTYPE','client_server_identity', 325, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_USER','client_server_identity', 330, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_USER_MYWMS_ROLE','client_server_identity', 335, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_VEHICLEDATA','client_server_identity', 340, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_WORKITEM','client_server_identity', 345, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_WORKITEMHISTORY','client_server_identity', 350, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_WORKVEHICLE','client_server_identity', 355, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_WORKVEHICLEHISTORY','client_server_identity', 360, current_timestamp, current_timestamp);
+insert into sym_trigger_router 
+(trigger_id,router_id,initial_load_order,last_update_time,create_time)
+values('MYWMS_ZONE','client_server_identity', 365, current_timestamp, current_timestamp);

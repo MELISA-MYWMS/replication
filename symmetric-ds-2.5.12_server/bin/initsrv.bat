@@ -1,0 +1,1 @@
+@sym -p root.properties --auto-create && sym -p root.properties --run-sql insert_sample.sql
