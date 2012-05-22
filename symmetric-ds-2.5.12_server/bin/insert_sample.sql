@@ -11,24 +11,24 @@ delete from sym_node_security;
 delete from sym_node;
 
 insert into sym_node_group (node_group_id, description) 
-values ('server', 'Main Server');
+values ('server','Main Server');
 insert into sym_node_group (node_group_id, description) 
-values ('client', 'Client');
+values ('client','Client');
 
 
 insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action)
-values ('client', 'server', 'P');
+values ('client','server','P');
 insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action)
-values ('server', 'client', 'W');
+values ('server','client','W');
 
 insert into sym_node (node_id, node_group_id, external_id, sync_enabled)
-values ('00000', 'server', '00000', 1);
+values ('00000','server','00000', 1);
 insert into sym_node_identity values ('00000');
 
 --insert into sym_node (node_id, node_group_id, external_id, sync_enabled) 
---values ('1', 'client', '1', '1');
+--values ('1','client','1','1');
 --insert into sym_node_security (node_id, node_password, registration_enabled, initial_load_enabled, created_at_node_id) 
---values ('1', 'jboss', '1', '1', '00000');
+--values ('1','jboss','1','1','00000');
 
 --
 -- Channels
@@ -41,228 +41,224 @@ values('mywms_channel', 1, 100000, 1, 'mywms symmetricds channel');
 -- Triggers
 --
 --insert into sym_trigger 
---(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
---values('JMS_MESSAGES' ,'JBOSS','JMS_MESSAGES','mywms_channel',current_timestamp,current_timestamp);
+--(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+--values('JMS_MESSAGES','JBOSS','JMS_MESSAGES','mywms_channel',1,current_timestamp,current_timestamp);
 --insert into sym_trigger 
---(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
---values('JMS_ROLES' ,'JBOSS','JMS_ROLES','mywms_channel',current_timestamp,current_timestamp);
+--(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+--values('JMS_ROLES','JBOSS','JMS_ROLES','mywms_channel',1,current_timestamp,current_timestamp);
 --insert into sym_trigger 
---(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
---values('JMS_SUBSCRIPTIONS' ,'JBOSS','JMS_SUBSCRIPTIONS','mywms_channel',current_timestamp,current_timestamp);
+--(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+--values('JMS_SUBSCRIPTIONS','JBOSS','JMS_SUBSCRIPTIONS','mywms_channel',1,current_timestamp,current_timestamp);
 --insert into sym_trigger 
---(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
---values('JMS_TRANSACTIONS' ,'JBOSS','JMS_TRANSACTIONS','mywms_channel',current_timestamp,current_timestamp);
+--(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+--values('JMS_TRANSACTIONS','JBOSS','JMS_TRANSACTIONS','mywms_channel',1,current_timestamp,current_timestamp);
 --insert into sym_trigger 
---(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
---values('JMS_USERS' ,'JBOSS','JMS_USERS','mywms_channel',current_timestamp,current_timestamp);
+--(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+--values('JMS_USERS','JBOSS','JMS_USERS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_AREA' ,'JBOSS','LOS_AREA','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_AREA','JBOSS','LOS_AREA','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_AVISREQ' ,'JBOSS','LOS_AVISREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_AVISREQ','JBOSS','LOS_AVISREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_BOM' ,'JBOSS','LOS_BOM','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_BOM','JBOSS','LOS_BOM','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_EXTINGUISHREQ' ,'JBOSS','LOS_EXTINGUISHREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_EXTINGUISHREQ','JBOSS','LOS_EXTINGUISHREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_EXTORDER' ,'JBOSS','LOS_EXTORDER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_EXTORDER','JBOSS','LOS_EXTORDER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_FIXASSGN' ,'JBOSS','LOS_FIXASSGN','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_FIXASSGN','JBOSS','LOS_FIXASSGN','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_GOODSRECEIPT' ,'JBOSS','LOS_GOODSRECEIPT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_GOODSRECEIPT','JBOSS','LOS_GOODSRECEIPT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_GOODSRECEIPT_LOS_AVISREQ' ,'JBOSS','LOS_GOODSRECEIPT_LOS_AVISREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_GOODSRECEIPT_LOS_AVISREQ','JBOSS','LOS_GOODSRECEIPT_LOS_AVISREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_GRRPOSITION' ,'JBOSS','LOS_GRRPOSITION','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_GRRPOSITION','JBOSS','LOS_GRRPOSITION','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_INVENTORY' ,'JBOSS','LOS_INVENTORY','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_INVENTORY','JBOSS','LOS_INVENTORY','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ITEMDATA_NUMBER' ,'JBOSS','LOS_ITEMDATA_NUMBER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ITEMDATA_NUMBER','JBOSS','LOS_ITEMDATA_NUMBER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_JRXML' ,'JBOSS','LOS_JRXML','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_JRXML','JBOSS','LOS_JRXML','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_LOCATIONCLUSTER' ,'JBOSS','LOS_LOCATIONCLUSTER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_LOCATIONCLUSTER','JBOSS','LOS_LOCATIONCLUSTER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ORDER' ,'JBOSS','LOS_ORDER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ORDER','JBOSS','LOS_ORDER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ORDERRECEIPT' ,'JBOSS','LOS_ORDERRECEIPT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ORDERRECEIPT','JBOSS','LOS_ORDERRECEIPT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ORDERRECEIPTPOS' ,'JBOSS','LOS_ORDERRECEIPTPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ORDERRECEIPTPOS','JBOSS','LOS_ORDERRECEIPTPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ORDERREQ' ,'JBOSS','LOS_ORDERREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ORDERREQ','JBOSS','LOS_ORDERREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ORDERREQPOS' ,'JBOSS','LOS_ORDERREQPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ORDERREQPOS','JBOSS','LOS_ORDERREQPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_OUTPOS' ,'JBOSS','LOS_OUTPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_OUTPOS','JBOSS','LOS_OUTPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_OUTREQ' ,'JBOSS','LOS_OUTREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_OUTREQ','JBOSS','LOS_OUTREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_PICKRECEIPT' ,'JBOSS','LOS_PICKRECEIPT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_PICKRECEIPT','JBOSS','LOS_PICKRECEIPT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_PICKRECEIPTPOS' ,'JBOSS','LOS_PICKRECEIPTPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_PICKRECEIPTPOS','JBOSS','LOS_PICKRECEIPTPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_PICKREQ' ,'JBOSS','LOS_PICKREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_PICKREQ','JBOSS','LOS_PICKREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_PICKREQPOS' ,'JBOSS','LOS_PICKREQPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_PICKREQPOS','JBOSS','LOS_PICKREQPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_RACK' ,'JBOSS','LOS_RACK','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_RACK','JBOSS','LOS_RACK','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_RACKLOCATION' ,'JBOSS','LOS_RACKLOCATION','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_RACKLOCATION','JBOSS','LOS_RACKLOCATION','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_REPLENISHREQ' ,'JBOSS','LOS_REPLENISHREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_REPLENISHREQ','JBOSS','LOS_REPLENISHREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_REPLENISHREQ_LOS_STORLOC' ,'JBOSS','LOS_REPLENISHREQ_LOS_STORLOC','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_REPLENISHREQ_LOS_STORLOC','JBOSS','LOS_REPLENISHREQ_LOS_STORLOC','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_SEQUENCENUMBER' ,'JBOSS','LOS_SEQUENCENUMBER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_SEQUENCENUMBER','JBOSS','LOS_SEQUENCENUMBER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_SERVICECONF' ,'JBOSS','LOS_SERVICECONF','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_SERVICECONF','JBOSS','LOS_SERVICECONF','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_SLLABEL' ,'JBOSS','LOS_SLLABEL','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_SLLABEL','JBOSS','LOS_SLLABEL','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STOCKRECORD' ,'JBOSS','LOS_STOCKRECORD','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STOCKRECORD','JBOSS','LOS_STOCKRECORD','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STOCKTAKING' ,'JBOSS','LOS_STOCKTAKING','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STOCKTAKING','JBOSS','LOS_STOCKTAKING','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STOCKTAKINGORDER' ,'JBOSS','LOS_STOCKTAKINGORDER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STOCKTAKINGORDER','JBOSS','LOS_STOCKTAKINGORDER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STOCKTAKINGRECORD' ,'JBOSS','LOS_STOCKTAKINGRECORD','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STOCKTAKINGRECORD','JBOSS','LOS_STOCKTAKINGRECORD','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STORAGELOCATIONTYPE' ,'JBOSS','LOS_STORAGELOCATIONTYPE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STORAGELOCATIONTYPE','JBOSS','LOS_STORAGELOCATIONTYPE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STORAGEREQ' ,'JBOSS','LOS_STORAGEREQ','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STORAGEREQ','JBOSS','LOS_STORAGEREQ','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_STORLOC' ,'JBOSS','LOS_STORLOC','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_STORLOC','JBOSS','LOS_STORLOC','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_SULABEL' ,'JBOSS','LOS_SULABEL','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_SULABEL','JBOSS','LOS_SULABEL','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_SYSPROP' ,'JBOSS','LOS_SYSPROP','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_SYSPROP','JBOSS','LOS_SYSPROP','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_TYPECAPACITYCONSTRAINT' ,'JBOSS','LOS_TYPECAPACITYCONSTRAINT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_TYPECAPACITYCONSTRAINT','JBOSS','LOS_TYPECAPACITYCONSTRAINT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_UL_RECORD' ,'JBOSS','LOS_UL_RECORD','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_UL_RECORD','JBOSS','LOS_UL_RECORD','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ULADVICE' ,'JBOSS','LOS_ULADVICE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ULADVICE','JBOSS','LOS_ULADVICE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_ULADVICEPOS' ,'JBOSS','LOS_ULADVICEPOS','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_ULADVICEPOS','JBOSS','LOS_ULADVICEPOS','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_UNITLOAD' ,'JBOSS','LOS_UNITLOAD','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_UNITLOAD','JBOSS','LOS_UNITLOAD','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('LOS_WORK_TYPE' ,'JBOSS','LOS_WORK_TYPE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('LOS_WORK_TYPE','JBOSS','LOS_WORK_TYPE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_AREA' ,'JBOSS','MYWMS_AREA','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_AREA','JBOSS','MYWMS_AREA','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_CLEARINGITEM' ,'JBOSS','MYWMS_CLEARINGITEM','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_CLEARINGITEM','JBOSS','MYWMS_CLEARINGITEM','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_CLIENT' ,'JBOSS','MYWMS_CLIENT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_CLIENT','JBOSS','MYWMS_CLIENT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_DOCUMENT' ,'JBOSS','MYWMS_DOCUMENT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_DOCUMENT','JBOSS','MYWMS_DOCUMENT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_ITEMDATA' ,'JBOSS','MYWMS_ITEMDATA','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_ITEMDATA','JBOSS','MYWMS_ITEMDATA','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_ITEMUNIT' ,'JBOSS','MYWMS_ITEMUNIT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_ITEMUNIT','JBOSS','MYWMS_ITEMUNIT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_LOGITEM' ,'JBOSS','MYWMS_LOGITEM','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_LOGITEM','JBOSS','MYWMS_LOGITEM','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_LOT' ,'JBOSS','MYWMS_LOT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_LOT','JBOSS','MYWMS_LOT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_PLUGINCONFIGURATION' ,'JBOSS','MYWMS_PLUGINCONFIGURATION','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_PLUGINCONFIGURATION','JBOSS','MYWMS_PLUGINCONFIGURATION','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_REQUEST' ,'JBOSS','MYWMS_REQUEST','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_REQUEST','JBOSS','MYWMS_REQUEST','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_ROLE' ,'JBOSS','MYWMS_ROLE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_ROLE','JBOSS','MYWMS_ROLE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_STOCKUNIT' ,'JBOSS','MYWMS_STOCKUNIT','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_STOCKUNIT','JBOSS','MYWMS_STOCKUNIT','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_UNITLOAD' ,'JBOSS','MYWMS_UNITLOAD','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_UNITLOAD','JBOSS','MYWMS_UNITLOAD','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_UNITLOADTYPE' ,'JBOSS','MYWMS_UNITLOADTYPE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_UNITLOADTYPE','JBOSS','MYWMS_UNITLOADTYPE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_USER' ,'JBOSS','MYWMS_USER','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_USER','JBOSS','MYWMS_USER','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_USER_MYWMS_ROLE' ,'JBOSS','MYWMS_USER_MYWMS_ROLE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_USER_MYWMS_ROLE','JBOSS','MYWMS_USER_MYWMS_ROLE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_VEHICLEDATA' ,'JBOSS','MYWMS_VEHICLEDATA','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_VEHICLEDATA','JBOSS','MYWMS_VEHICLEDATA','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_WORKITEM' ,'JBOSS','MYWMS_WORKITEM','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_WORKITEM','JBOSS','MYWMS_WORKITEM','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_WORKITEMHISTORY' ,'JBOSS','MYWMS_WORKITEMHISTORY','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_WORKITEMHISTORY','JBOSS','MYWMS_WORKITEMHISTORY','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_WORKVEHICLE' ,'JBOSS','MYWMS_WORKVEHICLE','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_WORKVEHICLE','JBOSS','MYWMS_WORKVEHICLE','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_WORKVEHICLEHISTORY' ,'JBOSS','MYWMS_WORKVEHICLEHISTORY','mywms_channel',current_timestamp,current_timestamp);
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_WORKVEHICLEHISTORY','JBOSS','MYWMS_WORKVEHICLEHISTORY','mywms_channel',1,current_timestamp,current_timestamp);
 insert into sym_trigger 
-(trigger_id,source_schema_name,source_table_name,channel_id,last_update_time,create_time)
-values('MYWMS_ZONE' ,'JBOSS','MYWMS_ZONE','mywms_channel',current_timestamp,current_timestamp);
-
-
-
-
+(trigger_id,source_schema_name,source_table_name,channel_id,SYNC_ON_INCOMING_BATCH,last_update_time,create_time)
+values('MYWMS_ZONE','JBOSS','MYWMS_ZONE','mywms_channel',1,current_timestamp,current_timestamp);
 
 --
 -- Routers
@@ -272,11 +268,11 @@ values('MYWMS_ZONE' ,'JBOSS','MYWMS_ZONE','mywms_channel',current_timestamp,curr
 
 insert into sym_router 
 (router_id,target_schema_name,source_node_group_id,target_node_group_id,create_time,last_update_time)
-values('server_client_identity', 'PUBLIC','server', 'client', current_timestamp, current_timestamp);
+values('server_client_identity','JBOSS','server','client', current_timestamp, current_timestamp);
 
 insert into sym_router 
 (router_id,target_schema_name,source_node_group_id,target_node_group_id,create_time,last_update_time)
-values('client_server_identity', 'JBOSS','client', 'server', current_timestamp, current_timestamp);
+values('client_server_identity','JBOSS','client','server', current_timestamp, current_timestamp);
 
 --
 -- Trigger Router Links
@@ -506,207 +502,208 @@ values('MYWMS_ZONE','server_client_identity', 365, current_timestamp, current_ti
 
 
 
+
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_AREA','client_server_identity', 30, current_timestamp, current_timestamp);
+values('LOS_AREA','client_server_identity', 430, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_AVISREQ','client_server_identity', 35, current_timestamp, current_timestamp);
+values('LOS_AVISREQ','client_server_identity', 435, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_BOM','client_server_identity', 40, current_timestamp, current_timestamp);
+values('LOS_BOM','client_server_identity', 440, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_EXTINGUISHREQ','client_server_identity', 45, current_timestamp, current_timestamp);
+values('LOS_EXTINGUISHREQ','client_server_identity', 445, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_EXTORDER','client_server_identity', 50, current_timestamp, current_timestamp);
+values('LOS_EXTORDER','client_server_identity', 450, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_FIXASSGN','client_server_identity', 55, current_timestamp, current_timestamp);
+values('LOS_FIXASSGN','client_server_identity', 455, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_GOODSRECEIPT','client_server_identity', 60, current_timestamp, current_timestamp);
+values('LOS_GOODSRECEIPT','client_server_identity', 460, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_GOODSRECEIPT_LOS_AVISREQ','client_server_identity', 65, current_timestamp, current_timestamp);
+values('LOS_GOODSRECEIPT_LOS_AVISREQ','client_server_identity', 465, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_GRRPOSITION','client_server_identity', 70, current_timestamp, current_timestamp);
+values('LOS_GRRPOSITION','client_server_identity', 470, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_INVENTORY','client_server_identity', 75, current_timestamp, current_timestamp);
+values('LOS_INVENTORY','client_server_identity', 475, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ITEMDATA_NUMBER','client_server_identity', 80, current_timestamp, current_timestamp);
+values('LOS_ITEMDATA_NUMBER','client_server_identity', 480, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_JRXML','client_server_identity', 85, current_timestamp, current_timestamp);
+values('LOS_JRXML','client_server_identity', 485, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_LOCATIONCLUSTER','client_server_identity', 90, current_timestamp, current_timestamp);
+values('LOS_LOCATIONCLUSTER','client_server_identity', 490, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ORDER','client_server_identity', 95, current_timestamp, current_timestamp);
+values('LOS_ORDER','client_server_identity', 495, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ORDERRECEIPT','client_server_identity', 100, current_timestamp, current_timestamp);
+values('LOS_ORDERRECEIPT','client_server_identity', 4100, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ORDERRECEIPTPOS','client_server_identity', 105, current_timestamp, current_timestamp);
+values('LOS_ORDERRECEIPTPOS','client_server_identity', 4105, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ORDERREQ','client_server_identity', 110, current_timestamp, current_timestamp);
+values('LOS_ORDERREQ','client_server_identity', 4110, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ORDERREQPOS','client_server_identity', 115, current_timestamp, current_timestamp);
+values('LOS_ORDERREQPOS','client_server_identity', 4115, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_OUTPOS','client_server_identity', 120, current_timestamp, current_timestamp);
+values('LOS_OUTPOS','client_server_identity', 4120, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_OUTREQ','client_server_identity', 125, current_timestamp, current_timestamp);
+values('LOS_OUTREQ','client_server_identity', 4125, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_PICKRECEIPT','client_server_identity', 130, current_timestamp, current_timestamp);
+values('LOS_PICKRECEIPT','client_server_identity', 4130, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_PICKRECEIPTPOS','client_server_identity', 135, current_timestamp, current_timestamp);
+values('LOS_PICKRECEIPTPOS','client_server_identity', 4135, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_PICKREQ','client_server_identity', 140, current_timestamp, current_timestamp);
+values('LOS_PICKREQ','client_server_identity', 4140, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_PICKREQPOS','client_server_identity', 145, current_timestamp, current_timestamp);
+values('LOS_PICKREQPOS','client_server_identity', 4145, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_RACK','client_server_identity', 150, current_timestamp, current_timestamp);
+values('LOS_RACK','client_server_identity', 4150, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_RACKLOCATION','client_server_identity', 155, current_timestamp, current_timestamp);
+values('LOS_RACKLOCATION','client_server_identity', 4155, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_REPLENISHREQ','client_server_identity', 160, current_timestamp, current_timestamp);
+values('LOS_REPLENISHREQ','client_server_identity', 4160, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_REPLENISHREQ_LOS_STORLOC','client_server_identity', 165, current_timestamp, current_timestamp);
+values('LOS_REPLENISHREQ_LOS_STORLOC','client_server_identity', 4165, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_SEQUENCENUMBER','client_server_identity', 170, current_timestamp, current_timestamp);
+values('LOS_SEQUENCENUMBER','client_server_identity', 4170, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_SERVICECONF','client_server_identity', 175, current_timestamp, current_timestamp);
+values('LOS_SERVICECONF','client_server_identity', 4175, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_SLLABEL','client_server_identity', 180, current_timestamp, current_timestamp);
+values('LOS_SLLABEL','client_server_identity', 4180, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STOCKRECORD','client_server_identity', 185, current_timestamp, current_timestamp);
+values('LOS_STOCKRECORD','client_server_identity', 4185, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STOCKTAKING','client_server_identity', 190, current_timestamp, current_timestamp);
+values('LOS_STOCKTAKING','client_server_identity', 4190, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STOCKTAKINGORDER','client_server_identity', 195, current_timestamp, current_timestamp);
+values('LOS_STOCKTAKINGORDER','client_server_identity', 4195, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STOCKTAKINGRECORD','client_server_identity', 200, current_timestamp, current_timestamp);
+values('LOS_STOCKTAKINGRECORD','client_server_identity', 4200, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STORAGELOCATIONTYPE','client_server_identity', 205, current_timestamp, current_timestamp);
+values('LOS_STORAGELOCATIONTYPE','client_server_identity', 4205, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STORAGEREQ','client_server_identity', 210, current_timestamp, current_timestamp);
+values('LOS_STORAGEREQ','client_server_identity', 4210, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_STORLOC','client_server_identity', 215, current_timestamp, current_timestamp);
+values('LOS_STORLOC','client_server_identity', 4215, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_SULABEL','client_server_identity', 220, current_timestamp, current_timestamp);
+values('LOS_SULABEL','client_server_identity', 4220, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_SYSPROP','client_server_identity', 225, current_timestamp, current_timestamp);
+values('LOS_SYSPROP','client_server_identity', 4225, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_TYPECAPACITYCONSTRAINT','client_server_identity', 230, current_timestamp, current_timestamp);
+values('LOS_TYPECAPACITYCONSTRAINT','client_server_identity', 4230, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_UL_RECORD','client_server_identity', 235, current_timestamp, current_timestamp);
+values('LOS_UL_RECORD','client_server_identity', 4235, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ULADVICE','client_server_identity', 240, current_timestamp, current_timestamp);
+values('LOS_ULADVICE','client_server_identity', 4240, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_ULADVICEPOS','client_server_identity', 245, current_timestamp, current_timestamp);
+values('LOS_ULADVICEPOS','client_server_identity', 4245, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_UNITLOAD','client_server_identity', 250, current_timestamp, current_timestamp);
+values('LOS_UNITLOAD','client_server_identity', 4250, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('LOS_WORK_TYPE','client_server_identity', 255, current_timestamp, current_timestamp);
+values('LOS_WORK_TYPE','client_server_identity', 4255, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_AREA','client_server_identity', 260, current_timestamp, current_timestamp);
+values('MYWMS_AREA','client_server_identity', 4260, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_CLEARINGITEM','client_server_identity', 265, current_timestamp, current_timestamp);
+values('MYWMS_CLEARINGITEM','client_server_identity', 4265, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_CLIENT','client_server_identity', 270, current_timestamp, current_timestamp);
+values('MYWMS_CLIENT','client_server_identity', 4270, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_DOCUMENT','client_server_identity', 275, current_timestamp, current_timestamp);
+values('MYWMS_DOCUMENT','client_server_identity', 4275, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_ITEMDATA','client_server_identity', 280, current_timestamp, current_timestamp);
+values('MYWMS_ITEMDATA','client_server_identity', 4280, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_ITEMUNIT','client_server_identity', 285, current_timestamp, current_timestamp);
+values('MYWMS_ITEMUNIT','client_server_identity', 4285, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_LOGITEM','client_server_identity', 290, current_timestamp, current_timestamp);
+values('MYWMS_LOGITEM','client_server_identity', 4290, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_LOT','client_server_identity', 295, current_timestamp, current_timestamp);
+values('MYWMS_LOT','client_server_identity', 4295, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_PLUGINCONFIGURATION','client_server_identity', 300, current_timestamp, current_timestamp);
+values('MYWMS_PLUGINCONFIGURATION','client_server_identity', 4300, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_REQUEST','client_server_identity', 305, current_timestamp, current_timestamp);
+values('MYWMS_REQUEST','client_server_identity', 4305, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_ROLE','client_server_identity', 310, current_timestamp, current_timestamp);
+values('MYWMS_ROLE','client_server_identity', 4310, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_STOCKUNIT','client_server_identity', 315, current_timestamp, current_timestamp);
+values('MYWMS_STOCKUNIT','client_server_identity', 4315, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_UNITLOAD','client_server_identity', 320, current_timestamp, current_timestamp);
+values('MYWMS_UNITLOAD','client_server_identity', 4320, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_UNITLOADTYPE','client_server_identity', 325, current_timestamp, current_timestamp);
+values('MYWMS_UNITLOADTYPE','client_server_identity', 4325, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_USER','client_server_identity', 330, current_timestamp, current_timestamp);
+values('MYWMS_USER','client_server_identity', 4330, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_USER_MYWMS_ROLE','client_server_identity', 335, current_timestamp, current_timestamp);
+values('MYWMS_USER_MYWMS_ROLE','client_server_identity', 4335, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_VEHICLEDATA','client_server_identity', 340, current_timestamp, current_timestamp);
+values('MYWMS_VEHICLEDATA','client_server_identity', 4340, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_WORKITEM','client_server_identity', 345, current_timestamp, current_timestamp);
+values('MYWMS_WORKITEM','client_server_identity', 4345, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_WORKITEMHISTORY','client_server_identity', 350, current_timestamp, current_timestamp);
+values('MYWMS_WORKITEMHISTORY','client_server_identity', 4350, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_WORKVEHICLE','client_server_identity', 355, current_timestamp, current_timestamp);
+values('MYWMS_WORKVEHICLE','client_server_identity', 4355, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_WORKVEHICLEHISTORY','client_server_identity', 360, current_timestamp, current_timestamp);
+values('MYWMS_WORKVEHICLEHISTORY','client_server_identity', 4360, current_timestamp, current_timestamp);
 insert into sym_trigger_router 
 (trigger_id,router_id,initial_load_order,last_update_time,create_time)
-values('MYWMS_ZONE','client_server_identity', 365, current_timestamp, current_timestamp);
+values('MYWMS_ZONE','client_server_identity', 4365, current_timestamp, current_timestamp);
