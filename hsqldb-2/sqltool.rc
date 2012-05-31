@@ -1,6 +1,6 @@
 # This is for a hsqldb Server running with default settings on your local
 # computer (and for which you have not changed the password for "SA").
 urlid localdb
-url jdbc:hsqldb:hsql://localhost/localdb
+url jdbc:hsqldb:hsql://localhost:9999/localdb
 username SA
 password

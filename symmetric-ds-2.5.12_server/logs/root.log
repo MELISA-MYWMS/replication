@@ -10323,3 +10323,580 @@ org.eclipse.jetty.io.EofException
 2012-05-31 07:58:03,756 INFO  [SymmetricDS] [SymmetricDS-job-17] Done updating my node info.
 2012-05-31 07:58:10,725 INFO  [SymmetricDS] [SymmetricDS-job-17] Routed 1 data events in 141 ms
 2012-05-31 07:58:20,772 INFO  [SymmetricDS] [SymmetricDS-job-19] Routed 1 data events in 32 ms
+2012-05-31 08:52:42,520 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-31 08:52:42,520 INFO  [SymmetricLauncher] [main] Option: name=port, value={8081}
+2012-05-31 08:52:42,520 INFO  [SymmetricLauncher] [main] Option: name=server, value={}
+2012-05-31 08:52:42,786 INFO  [SymmetricWebServer] [main] About to start SymmetricDS web server on port 8081
+2012-05-31 08:52:47,244 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-31 08:52:48,060 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-31 08:52:56,466 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-31 08:52:57,263 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-31 08:52:57,404 INFO  [SymmetricDS] [main] Starting registered node [group=server, id=00000, externalId=00000]
+2012-05-31 08:52:57,419 INFO  [SymmetricDS] [main] Synchronizing triggers
+2012-05-31 08:52:57,950 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 08:52:58,013 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 08:52:58,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 08:52:58,247 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 08:52:58,310 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 08:52:58,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 08:52:58,450 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 08:52:58,482 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 08:52:58,560 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 08:52:58,669 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 08:52:58,732 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 08:52:58,794 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 08:52:58,888 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 08:52:58,935 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 08:52:59,185 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 08:52:59,279 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 08:52:59,341 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 08:52:59,404 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 08:52:59,544 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 08:52:59,607 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 08:52:59,669 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 08:52:59,779 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 08:52:59,857 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 08:52:59,904 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 08:53:00,013 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 08:53:00,091 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 08:53:00,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 08:53:00,263 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 08:53:00,294 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 08:53:00,357 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 08:53:00,466 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 08:53:00,497 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 08:53:00,529 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 08:53:00,607 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 08:53:00,685 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 08:53:00,732 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 08:53:00,794 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 08:53:00,841 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 08:53:00,904 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 08:53:00,997 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 08:53:01,075 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 08:53:01,154 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 08:53:01,294 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 08:53:01,497 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 08:53:01,779 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 08:53:01,888 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 08:53:01,904 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 08:53:01,950 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 08:53:02,013 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 08:53:02,044 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 08:53:02,060 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 08:53:02,107 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 08:53:02,138 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 08:53:02,169 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 08:53:02,216 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 08:53:02,247 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 08:53:02,279 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 08:53:02,357 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 08:53:02,388 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 08:53:02,450 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 08:53:02,560 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 08:53:02,669 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 08:53:02,732 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 08:53:02,810 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 08:53:02,857 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 08:53:02,904 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 08:53:02,997 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 08:53:03,044 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 08:53:03,107 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 08:53:03,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 08:53:03,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 08:53:03,232 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 08:53:03,294 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 08:53:03,310 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 08:53:03,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 08:53:03,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 08:53:03,404 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 08:53:03,419 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 08:53:03,450 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 08:53:03,466 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 08:53:03,482 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 08:53:03,544 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 08:53:03,560 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 08:53:03,591 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 08:53:03,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 08:53:03,700 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 08:53:03,716 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 08:53:03,779 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 08:53:03,794 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 08:53:03,825 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 08:53:03,872 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 08:53:03,888 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 08:53:03,919 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 08:53:03,966 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 08:53:04,138 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 08:53:04,169 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 08:53:04,247 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 08:53:04,279 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 08:53:04,310 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 08:53:04,357 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 08:53:04,419 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 08:53:04,450 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 08:53:04,513 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 08:53:04,529 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 08:53:04,544 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 08:53:04,591 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 08:53:04,622 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 08:53:04,654 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 08:53:04,685 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 08:53:04,716 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 08:53:04,732 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 08:53:04,779 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 08:53:04,794 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 08:53:04,825 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 08:53:04,904 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 08:53:04,919 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 08:53:04,950 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 08:53:04,997 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 08:53:05,013 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 08:53:05,044 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 08:53:05,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 08:53:05,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 08:53:05,263 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 08:53:05,310 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 08:53:05,341 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 08:53:05,357 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 08:53:05,419 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 08:53:05,435 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 08:53:05,466 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 08:53:05,529 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 08:53:05,544 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 08:53:05,654 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 08:53:05,716 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 08:53:05,779 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 08:53:05,794 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 08:53:05,841 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 08:53:05,857 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 08:53:05,888 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 08:53:05,935 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 08:53:05,966 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 08:53:05,982 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 08:53:06,091 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 08:53:06,107 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 08:53:06,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 08:53:06,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 08:53:06,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 08:53:06,232 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 08:53:06,279 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 08:53:06,294 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 08:53:06,325 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 08:53:06,357 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 08:53:06,388 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 08:53:06,419 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 08:53:06,482 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 08:53:06,513 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 08:53:06,560 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 08:53:06,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 08:53:06,654 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 08:53:06,669 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 08:53:06,716 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 08:53:06,732 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 08:53:06,747 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 08:53:06,779 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 08:53:06,841 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 08:53:06,857 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 08:53:06,919 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 08:53:06,950 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 08:53:06,982 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 08:53:07,029 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 08:53:07,044 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 08:53:07,060 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 08:53:07,107 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 08:53:07,122 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 08:53:07,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 08:53:07,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 08:53:07,216 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 08:53:07,247 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 08:53:07,310 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 08:53:07,341 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 08:53:07,372 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 08:53:07,435 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 08:53:07,466 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 08:53:07,544 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 08:53:07,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 08:53:07,654 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 08:53:07,685 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 08:53:07,732 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 08:53:07,763 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 08:53:07,779 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 08:53:07,841 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 08:53:07,872 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 08:53:07,919 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 08:53:07,966 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 08:53:07,982 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 08:53:07,997 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 08:53:08,044 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 08:53:08,060 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 08:53:08,075 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 08:53:08,122 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 08:53:08,154 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 08:53:08,169 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 08:53:08,216 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 08:53:08,232 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 08:53:08,247 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 08:53:08,310 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 08:53:08,325 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 08:53:08,372 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 08:53:08,435 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 08:53:08,450 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 08:53:08,482 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 08:53:08,529 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 08:53:08,560 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 08:53:08,591 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 08:53:08,669 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 08:53:08,685 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 08:53:08,732 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 08:53:08,763 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 08:53:08,779 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 08:53:08,810 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 08:53:08,857 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 08:53:08,888 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 08:53:08,919 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 08:53:08,966 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 08:53:08,982 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 08:53:09,013 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 08:53:09,044 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 08:53:09,060 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 08:53:09,091 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 08:53:09,122 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 08:53:09,138 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 08:53:09,169 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 08:53:09,216 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 08:53:09,247 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 08:53:09,294 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 08:53:09,357 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 08:53:09,388 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 08:53:09,419 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 08:53:09,497 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 08:53:09,529 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 08:53:09,560 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 08:53:09,575 INFO  [SymmetricDS] [main] Done synchronizing triggers
+2012-05-31 08:53:09,575 INFO  [SymmetricDS] [main] Updating time and version node info
+2012-05-31 08:53:09,575 INFO  [SymmetricDS] [main] Updating my node configuration info according to the symmetric properties
+2012-05-31 08:53:09,654 INFO  [SymmetricDS] [main] Done updating my node info.
+2012-05-31 08:53:09,669 INFO  [SymmetricDS] [main] Starting job.routing
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.push
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.pull
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.purge.outgoing
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.purge.incoming
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.purge.datagaps
+2012-05-31 08:53:09,700 INFO  [SymmetricDS] [main] Starting job.stat.flush
+2012-05-31 08:53:09,716 INFO  [SymmetricDS] [main] Starting job.synctriggers
+2012-05-31 08:53:09,716 INFO  [SymmetricDS] [main] Starting job.heartbeat
+2012-05-31 08:53:09,716 INFO  [SymmetricDS] [main] Starting job.watchdog
+2012-05-31 08:53:09,716 INFO  [SymmetricDS] [main] Started SymmetricDS
+2012-05-31 08:53:09,716 INFO  [SymmetricDS] [main] SymmetricDS: type=engine, name=SymmetricDS, version=2.5.12, groupId=server, externalId=00000, databaseName=Oracle, databaseVersion=10.2, driverName=Oracle JDBC driver, driverVersion=10.2.0.5.0
+2012-05-31 08:53:09,966 INFO  [SymmetricWebServer] [main] Starting JMX HTTP console on port 8082
+2012-05-31 08:53:10,200 INFO  [SymmetricWebServer] [main] Joining the web server main thread
+2012-05-31 08:53:15,154 INFO  [JdbcBatchPreparedStatementCallback] [SymmetricDS-job-9] Using Oracle batching with an execute rate of 100
+2012-05-31 08:53:15,200 INFO  [SymmetricDS] [SymmetricDS-job-9] Routed 1 data events in 437 ms
+2012-05-31 08:54:04,404 INFO  [SymmetricDS] [qtp30191657-16] Just opened registration for external id of 1 and a node group of client and a node id of 1
+2012-05-31 08:54:05,685 INFO  [SymmetricDS] [SymmetricDS-job-4] Routed 4 data events in 47 ms
+2012-05-31 08:54:18,154 INFO  [SymmetricDS] [SymmetricDS-job-2] Purged all 0 incoming batch for node 1
+2012-05-31 08:54:18,154 INFO  [SymmetricDS] [SymmetricDS-job-2] Inserted reload events for node 1 in 2454 ms
+2012-05-31 08:54:18,279 INFO  [SymmetricDS] [SymmetricDS-job-2] Routed 2 data events in 125 ms
+2012-05-31 08:55:58,747 INFO  [SymmetricDS] [SymmetricDS-job-3] Routed 1 data events in 31 ms
+2012-05-31 09:09:17,669 INFO  [SymmetricLauncher] [main] Option: name=properties, value={root.properties}
+2012-05-31 09:09:17,669 INFO  [SymmetricLauncher] [main] Option: name=port, value={8081}
+2012-05-31 09:09:17,669 INFO  [SymmetricLauncher] [main] Option: name=server, value={}
+2012-05-31 09:09:17,700 INFO  [SymmetricWebServer] [main] About to start SymmetricDS web server on port 8081
+2012-05-31 09:09:20,575 INFO  [SymmetricDS] [main] The DbDialect being used is org.jumpmind.symmetric.db.oracle.OracleDbDialect
+2012-05-31 09:09:21,216 INFO  [SymmetricDS] [main] Initializing SymmetricDS database.
+2012-05-31 09:09:22,263 INFO  [SymmetricDS] [main] Checking if SymmetricDS tables need created or altered.
+2012-05-31 09:09:23,091 INFO  [SymmetricDS] [main] Done initializing SymmetricDS database.
+2012-05-31 09:09:23,263 INFO  [SymmetricDS] [main] Starting registered node [group=server, id=00000, externalId=00000]
+2012-05-31 09:09:23,263 INFO  [SymmetricDS] [main] Synchronizing triggers
+2012-05-31 09:09:23,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 09:09:23,685 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 09:09:23,763 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRQPS trigger for LOS_PICKREQPOS
+2012-05-31 09:09:23,888 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 09:09:23,950 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 09:09:24,029 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GRRPSTN trigger for LOS_GRRPOSITION
+2012-05-31 09:09:24,122 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 09:09:24,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 09:09:24,294 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKTM trigger for MYWMS_WORKITEM
+2012-05-31 09:09:24,372 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 09:09:24,435 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 09:09:24,497 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_ZN_SRVR trigger for MYWMS_ZONE
+2012-05-31 09:09:24,575 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 09:09:24,716 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 09:09:24,794 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TPS_SRVR trigger for LOS_OUTPOS
+2012-05-31 09:09:24,888 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 09:09:24,935 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 09:09:24,997 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRCPTPS trigger for LOS_PICKRECEIPTPOS
+2012-05-31 09:09:25,091 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 09:09:25,107 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 09:09:25,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_858860427_SRVR trigger for sym_channel
+2012-05-31 09:09:25,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 09:09:25,216 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 09:09:25,232 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RCKLCTN trigger for LOS_RACKLOCATION
+2012-05-31 09:09:25,279 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 09:09:25,294 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 09:09:25,325 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1187147715_SRVR trigger for sym_transform_table
+2012-05-31 09:09:25,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 09:09:25,404 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 09:09:25,435 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_SR_SRVR trigger for MYWMS_USER
+2012-05-31 09:09:25,466 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 09:09:25,497 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 09:09:25,513 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRGRQ_SRVR trigger for LOS_STORAGEREQ
+2012-05-31 09:09:25,560 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 09:09:25,575 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 09:09:25,591 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRQPS trigger for LOS_ORDERREQPOS
+2012-05-31 09:09:25,622 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 09:09:25,638 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 09:09:25,669 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_370434682_SRVR trigger for sym_node_group
+2012-05-31 09:09:25,716 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 09:09:25,763 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 09:09:25,779 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_BM_SRVR trigger for LOS_BOM
+2012-05-31 09:09:25,857 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 09:09:25,904 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 09:09:25,966 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_939981760_SRVR trigger for sym_trigger
+2012-05-31 09:09:26,060 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 09:09:26,075 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 09:09:26,122 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_TMDT trigger for MYWMS_ITEMDATA
+2012-05-31 09:09:26,247 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 09:09:26,279 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 09:09:26,294 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LDVCPS_SRVR trigger for LOS_ULADVICEPOS
+2012-05-31 09:09:26,325 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 09:09:26,357 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 09:09:26,404 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDR_SRVR trigger for LOS_ORDER
+2012-05-31 09:09:26,450 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 09:09:26,466 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 09:09:26,497 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TMDT_NMBR trigger for LOS_ITEMDATA_NUMBER
+2012-05-31 09:09:26,544 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 09:09:26,560 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 09:09:26,591 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRQ_SRVR trigger for LOS_PICKREQ
+2012-05-31 09:09:26,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 09:09:26,669 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 09:09:26,700 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_LGTM trigger for MYWMS_LOGITEM
+2012-05-31 09:09:26,747 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 09:09:26,763 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 09:09:26,779 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RPLNSHRQ_L trigger for LOS_REPLENISHREQ_LOS_STORLOC
+2012-05-31 09:09:26,825 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 09:09:26,841 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 09:09:26,857 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LCTNCLSTR trigger for LOS_LOCATIONCLUSTER
+2012-05-31 09:09:26,935 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 09:09:26,966 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 09:09:26,982 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRGLCTNTYP trigger for LOS_STORAGELOCATIONTYPE
+2012-05-31 09:09:27,044 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 09:09:27,060 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 09:09:27,091 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GDSRCPT trigger for LOS_GOODSRECEIPT
+2012-05-31 09:09:27,138 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 09:09:27,154 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 09:09:27,169 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SQNCNMBR trigger for LOS_SEQUENCENUMBER
+2012-05-31 09:09:27,200 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 09:09:27,216 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 09:09:27,232 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_GDSRCPT_LS trigger for LOS_GOODSRECEIPT_LOS_AVISREQ
+2012-05-31 09:09:27,294 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 09:09:27,310 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 09:09:27,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_LDVC_SRVR trigger for LOS_ULADVICE
+2012-05-31 09:09:27,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 09:09:27,404 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 09:09:27,419 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_XTRDR_SRVR trigger for LOS_EXTORDER
+2012-05-31 09:09:27,466 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 09:09:27,482 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 09:09:27,513 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_CLNT trigger for MYWMS_CLIENT
+2012-05-31 09:09:27,560 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 09:09:27,575 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 09:09:27,591 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1968381441_SRVR trigger for sym_transform_column
+2012-05-31 09:09:27,654 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 09:09:27,669 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 09:09:27,700 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_DCMNT trigger for MYWMS_DOCUMENT
+2012-05-31 09:09:27,779 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 09:09:27,810 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 09:09:27,841 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKVHCL trigger for MYWMS_WORKVEHICLE
+2012-05-31 09:09:27,888 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 09:09:27,904 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 09:09:27,935 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TYPCPCTYCN trigger for LOS_TYPECAPACITYCONSTRAINT
+2012-05-31 09:09:27,982 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 09:09:27,997 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 09:09:28,013 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_RQST trigger for MYWMS_REQUEST
+2012-05-31 09:09:28,060 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 09:09:28,091 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 09:09:28,107 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKVHCL1 trigger for MYWMS_WORKVEHICLEHISTORY
+2012-05-31 09:09:28,154 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 09:09:28,169 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 09:09:28,200 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRQ_SRVR trigger for LOS_ORDERREQ
+2012-05-31 09:09:28,232 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 09:09:28,263 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 09:09:28,279 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_PCKRCPT trigger for LOS_PICKRECEIPT
+2012-05-31 09:09:28,341 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 09:09:28,372 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 09:09:28,404 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNGRC trigger for LOS_STOCKTAKINGRECORD
+2012-05-31 09:09:28,450 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 09:09:28,466 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 09:09:28,482 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_FXSSGN_SRVR trigger for LOS_FIXASSGN
+2012-05-31 09:09:28,591 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 09:09:28,607 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 09:09:28,638 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_VSRQ_SRVR trigger for LOS_AVISREQ
+2012-05-31 09:09:28,700 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 09:09:28,716 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 09:09:28,747 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_NTLDTYP trigger for MYWMS_UNITLOADTYPE
+2012-05-31 09:09:28,794 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 09:09:28,825 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 09:09:28,841 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_WRKTMHS trigger for MYWMS_WORKITEMHISTORY
+2012-05-31 09:09:28,904 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 09:09:28,919 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 09:09:28,950 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STRLC_SRVR trigger for LOS_STORLOC
+2012-05-31 09:09:29,013 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 09:09:29,029 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 09:09:29,060 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_STCKNT trigger for MYWMS_STOCKUNIT
+2012-05-31 09:09:29,107 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 09:09:29,122 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 09:09:29,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_R_SRVR trigger for MYWMS_AREA
+2012-05-31 09:09:29,200 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 09:09:29,216 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 09:09:29,247 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SYSPRP_SRVR trigger for LOS_SYSPROP
+2012-05-31 09:09:29,294 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 09:09:29,325 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 09:09:29,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRCPTPS trigger for LOS_ORDERRECEIPTPOS
+2012-05-31 09:09:29,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 09:09:29,419 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 09:09:29,435 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SLBL_SRVR trigger for LOS_SULABEL
+2012-05-31 09:09:29,482 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 09:09:29,497 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 09:09:29,529 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_TMNT trigger for MYWMS_ITEMUNIT
+2012-05-31 09:09:29,575 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 09:09:29,591 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 09:09:29,607 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_NTLD_SRVR trigger for LOS_UNITLOAD
+2012-05-31 09:09:29,669 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 09:09:29,685 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 09:09:29,700 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_PLGNCNF trigger for MYWMS_PLUGINCONFIGURATION
+2012-05-31 09:09:29,763 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 09:09:29,779 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 09:09:29,810 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_L_RCRD_SRVR trigger for LOS_UL_RECORD
+2012-05-31 09:09:29,841 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 09:09:29,857 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 09:09:29,872 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RPLNSHRQ trigger for LOS_REPLENISHREQ
+2012-05-31 09:09:29,904 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 09:09:29,919 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 09:09:29,935 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_R_SRVR trigger for LOS_AREA
+2012-05-31 09:09:29,982 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 09:09:30,013 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 09:09:30,044 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_VHCLDT trigger for MYWMS_VEHICLEDATA
+2012-05-31 09:09:30,091 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 09:09:30,107 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 09:09:30,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_RL_SRVR trigger for MYWMS_ROLE
+2012-05-31 09:09:30,169 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 09:09:30,185 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 09:09:30,200 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_XTNGSHRQ trigger for LOS_EXTINGUISHREQ
+2012-05-31 09:09:30,247 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 09:09:30,310 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 09:09:30,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SRVCCNF trigger for LOS_SERVICECONF
+2012-05-31 09:09:30,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 09:09:30,419 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 09:09:30,435 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNGRDR trigger for LOS_STOCKTAKINGORDER
+2012-05-31 09:09:30,497 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 09:09:30,529 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 09:09:30,575 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_CLRNGTM trigger for MYWMS_CLEARINGITEM
+2012-05-31 09:09:30,638 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 09:09:30,654 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 09:09:30,685 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RDRRCPT trigger for LOS_ORDERRECEIPT
+2012-05-31 09:09:30,732 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 09:09:30,747 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 09:09:30,779 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKTKNG trigger for LOS_STOCKTAKING
+2012-05-31 09:09:30,825 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 09:09:30,841 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 09:09:30,872 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_WRK_TYP trigger for LOS_WORK_TYPE
+2012-05-31 09:09:30,904 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 09:09:30,919 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 09:09:30,935 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_SR_MYWM trigger for MYWMS_USER_MYWMS_ROLE
+2012-05-31 09:09:30,966 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 09:09:30,997 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 09:09:31,044 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_SLLBL_SRVR trigger for LOS_SLLABEL
+2012-05-31 09:09:31,091 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 09:09:31,107 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 09:09:31,138 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_RCK_SRVR trigger for LOS_RACK
+2012-05-31 09:09:31,185 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 09:09:31,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 09:09:31,216 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1223876657_SRVR trigger for sym_parameter
+2012-05-31 09:09:31,279 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 09:09:31,294 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 09:09:31,325 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1988229057_SRVR trigger for sym_router
+2012-05-31 09:09:31,404 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 09:09:31,435 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 09:09:31,466 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_JRXML_SRVR trigger for LOS_JRXML
+2012-05-31 09:09:31,513 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 09:09:31,529 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 09:09:31,544 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_2003483291_SRVR trigger for sym_node_security
+2012-05-31 09:09:31,622 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 09:09:31,638 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 09:09:31,669 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_STCKRCRD trigger for LOS_STOCKRECORD
+2012-05-31 09:09:31,716 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 09:09:31,732 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 09:09:31,763 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_TRQ_SRVR trigger for LOS_OUTREQ
+2012-05-31 09:09:31,825 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 09:09:31,841 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 09:09:31,872 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_LS_NVNTRY_SRVR trigger for LOS_INVENTORY
+2012-05-31 09:09:31,919 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 09:09:31,935 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 09:09:31,966 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_NTLD trigger for MYWMS_UNITLOAD
+2012-05-31 09:09:31,997 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 09:09:32,013 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 09:09:32,044 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_216582929_SRVR trigger for sym_node_group_channel_window
+2012-05-31 09:09:32,075 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 09:09:32,091 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 09:09:32,107 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1493859681_SRVR trigger for sym_node_group_link
+2012-05-31 09:09:32,169 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 09:09:32,200 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 09:09:32,232 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_CL_MYWMS_LT_SRVR trigger for MYWMS_LOT
+2012-05-31 09:09:32,279 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 09:09:32,310 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 09:09:32,341 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_1785187450_SRVR trigger for sym_node
+2012-05-31 09:09:32,388 INFO  [SymmetricDS] [main] Creating SYM_ON_I_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 09:09:32,404 INFO  [SymmetricDS] [main] Creating SYM_ON_U_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 09:09:32,435 INFO  [SymmetricDS] [main] Creating SYM_ON_D_FOR_449755096_SRVR trigger for sym_trigger_router
+2012-05-31 09:09:32,450 INFO  [SymmetricDS] [main] Done synchronizing triggers
+2012-05-31 09:09:32,450 INFO  [SymmetricDS] [main] Updating time and version node info
+2012-05-31 09:09:32,450 INFO  [SymmetricDS] [main] Updating my node configuration info according to the symmetric properties
+2012-05-31 09:09:32,497 INFO  [SymmetricDS] [main] Done updating my node info.
+2012-05-31 09:09:32,497 INFO  [SymmetricDS] [main] Starting job.routing
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.push
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.pull
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.purge.outgoing
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.purge.incoming
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.purge.datagaps
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.stat.flush
+2012-05-31 09:09:32,513 INFO  [SymmetricDS] [main] Starting job.synctriggers
+2012-05-31 09:09:32,529 INFO  [SymmetricDS] [main] Starting job.heartbeat
+2012-05-31 09:09:32,529 INFO  [SymmetricDS] [main] Starting job.watchdog
+2012-05-31 09:09:32,529 INFO  [SymmetricDS] [main] Started SymmetricDS
+2012-05-31 09:09:32,529 INFO  [SymmetricDS] [main] SymmetricDS: type=engine, name=SymmetricDS, version=2.5.12, groupId=server, externalId=00000, databaseName=Oracle, databaseVersion=10.2, driverName=Oracle JDBC driver, driverVersion=10.2.0.5.0
+2012-05-31 09:09:32,575 INFO  [SymmetricWebServer] [main] Starting JMX HTTP console on port 8082
+2012-05-31 09:09:32,622 INFO  [SymmetricWebServer] [main] Joining the web server main thread
+2012-05-31 09:09:37,763 INFO  [JdbcBatchPreparedStatementCallback] [SymmetricDS-job-3] Using Oracle batching with an execute rate of 100
+2012-05-31 09:09:37,810 INFO  [SymmetricDS] [SymmetricDS-job-3] Routed 1 data events in 235 ms
+2012-05-31 09:10:01,482 INFO  [SymmetricDS] [qtp30191657-14] Just opened registration for external id of 1 and a node group of client and a node id of 1
+2012-05-31 09:10:08,013 INFO  [SymmetricDS] [SymmetricDS-job-8] Routed 4 data events in 47 ms
+2012-05-31 09:10:20,263 INFO  [SymmetricDS] [SymmetricDS-job-10] Purged all 0 incoming batch for node 1
+2012-05-31 09:10:20,263 INFO  [SymmetricDS] [SymmetricDS-job-10] Inserted reload events for node 1 in 2234 ms
+2012-05-31 09:10:20,341 INFO  [SymmetricDS] [SymmetricDS-job-10] Routed 2 data events in 78 ms
+2012-05-31 09:18:32,077 INFO  [SymmetricDS] [SymmetricDS-job-8] Routed 1 data events in 31 ms
+2012-05-31 09:24:33,280 INFO  [SymmetricDS] [SymmetricDS-job-4] Updating time and version node info
+2012-05-31 09:24:33,280 INFO  [SymmetricDS] [SymmetricDS-job-4] Updating my node configuration info according to the symmetric properties
+2012-05-31 09:24:33,296 INFO  [SymmetricDS] [SymmetricDS-job-4] Done updating my node info.
+2012-05-31 09:24:33,468 INFO  [SymmetricDS] [SymmetricDS-job-11] Routed 1 data events in 109 ms
+2012-05-31 09:25:13,624 INFO  [SymmetricDS] [SymmetricDS-job-13] Routed 1 data events in 31 ms
+2012-05-31 09:39:33,484 INFO  [SymmetricDS] [SymmetricDS-job-5] Updating time and version node info
+2012-05-31 09:39:33,484 INFO  [SymmetricDS] [SymmetricDS-job-5] Updating my node configuration info according to the symmetric properties
+2012-05-31 09:39:33,499 INFO  [SymmetricDS] [SymmetricDS-job-5] Done updating my node info.
+2012-05-31 09:39:37,562 INFO  [SymmetricDS] [SymmetricDS-job-8] Routed 1 data events in 110 ms
+2012-05-31 09:40:07,687 INFO  [SymmetricDS] [SymmetricDS-job-2] Routed 1 data events in 16 ms
+2012-05-31 09:54:34,280 INFO  [SymmetricDS] [SymmetricDS-job-10] Updating time and version node info
+2012-05-31 09:54:34,280 INFO  [SymmetricDS] [SymmetricDS-job-10] Updating my node configuration info according to the symmetric properties
+2012-05-31 09:54:34,296 INFO  [SymmetricDS] [SymmetricDS-job-10] Done updating my node info.
+2012-05-31 09:54:40,530 INFO  [SymmetricDS] [SymmetricDS-job-11] Routed 1 data events in 203 ms
+2012-05-31 09:55:10,687 INFO  [SymmetricDS] [SymmetricDS-job-3] Routed 1 data events in 47 ms
+2012-05-31 10:09:35,218 INFO  [SymmetricDS] [SymmetricDS-job-6] Updating time and version node info
+2012-05-31 10:09:35,218 INFO  [SymmetricDS] [SymmetricDS-job-6] Updating my node configuration info according to the symmetric properties
+2012-05-31 10:09:35,234 INFO  [SymmetricDS] [SymmetricDS-job-6] Done updating my node info.
+2012-05-31 10:09:43,609 INFO  [SymmetricDS] [SymmetricDS-job-10] Routed 1 data events in 141 ms
+2012-05-31 10:10:13,718 INFO  [SymmetricDS] [SymmetricDS-job-6] Routed 1 data events in 16 ms
+2012-05-31 10:24:36,032 INFO  [SymmetricDS] [SymmetricDS-job-7] Updating time and version node info
+2012-05-31 10:24:36,032 INFO  [SymmetricDS] [SymmetricDS-job-7] Updating my node configuration info according to the symmetric properties
+2012-05-31 10:24:36,048 INFO  [SymmetricDS] [SymmetricDS-job-7] Done updating my node info.
+2012-05-31 10:24:36,563 INFO  [SymmetricDS] [SymmetricDS-job-6] Routed 1 data events in 125 ms
+2012-05-31 10:25:07,013 INFO  [SymmetricDS] [SymmetricDS-job-3] Routed 1 data events in 14 ms

@@ -1,0 +1,1 @@
+@java -jar lib/sqltool.jar --rcFile=sqltool.rc --sql="SHUTDOWN;"  localdb 
