@@ -1,3 +1,0 @@
-java -classpath symmetric-core-2.5.12.jar;lib/hsqldb.jar org.hsqldb.server.Server
-
-java -jar lib/sqltool.jar --rcFile=sqltool.rc localdb hsql_createTables.sql

@@ -1,1 +1,0 @@
-@java -classpath symmetric-core-2.5.12.jar;lib/hsqldb.jar org.hsqldb.Server -database.0 file:localdb -dbname.0 localdb -port 9999
